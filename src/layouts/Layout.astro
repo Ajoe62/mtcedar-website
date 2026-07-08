@@ -1,0 +1,103 @@
+---
+import '../styles/global.css';
+import '../styles/enhance.css';
+
+const {
+  title = 'Mt Cedar British International School — Benin City',
+  description = 'A British-curriculum school in Benin City, Edo State — nurturing confident, principled young people from nursery through secondary. Committed to Excellence, Character and Growth.',
+  active = '',
+} = Astro.props;
+
+const nav = [
+  { href: '/about', label: 'About', key: 'about' },
+  { href: '/academics', label: 'Academics', key: 'academics' },
+  { href: '/admissions', label: 'Admissions', key: 'admissions' },
+  { href: '/school-life', label: 'School Life', key: 'school-life' },
+  { href: '/news', label: 'News', key: 'news' },
+  { href: '/contact', label: 'Contact', key: 'contact' },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/logo.jpg" alt="Mt Cedar British International School crest" width="46" height="46" />
+      <span><b>Mt Cedar</b><small>British International School</small></span>
+    </a>
+    <nav class="main">
+      {nav.map((item) => (
+        <a href={item.href} class={active === item.key ? 'is-active' : ''}>{item.label}</a>
+      ))}
+    </nav>
+    <a class="btn btn-gold" href="/admissions">Book a Visit</a>
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false" id="menuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    {nav.map((item) => (
+      <a href={item.href} class={active === item.key ? 'is-active' : ''}>{item.label}</a>
+    ))}
+    <a class="btn btn-gold" href="/admissions">Book a Visit</a>
+  </nav>
+</header>
+
+<slot />
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fbrand">
+      <a class="brand" href="/">
+        <img src="/logo.jpg" alt="Mt Cedar crest" width="46" height="46" />
+        <span><b>Mt Cedar</b><small>British International School</small></span>
+      </a>
+      <p>Committed to Excellence, Character and Growth — a British-curriculum school in Benin City, Edo State.</p>
+    </div>
+    <div>
+      <h4>Visit &amp; Contact</h4>
+      <a href="https://maps.google.com/?q=7+Saturday+Imasuen+Street+Obaretin+Ikpoba-Okha+Benin+City" target="_blank" rel="noopener">7 Saturday Imasuen Street, Obaretin Community, Ikpoba-Okha LGA, Benin City, Edo State</a>
+      <a href="tel:08056733071">0805 673 3071</a>
+      <a href="tel:09043729659">0904 372 9659</a>
+      <a href="mailto:mtcedarbritishinternationalsch@gmail.com">mtcedarbritishinternationalsch@gmail.com</a>
+    </div>
+    <div>
+      <h4>Explore</h4>
+      <a href="/about">About the School</a>
+      <a href="/academics">Academics</a>
+      <a href="/admissions">Admissions</a>
+      <a href="/school-life">School Life</a>
+      <a href="/news">News &amp; Events</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </div>
+  <div class="foot-b"><div class="wrap"><span>© 2026 Mt Cedar British International School</span><span>mtcedarbritishinternationalsch.com.ng</span></div></div>
+</footer>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileNav');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? '✕' : '☰';
+    });
+  }
+</script>
+
+</body>
+</html>
