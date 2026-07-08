@@ -1,5 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import MediaText from '../components/MediaText.astro';
+import { Image } from 'astro:assets';
+import introPhoto from '../assets/images/engagedlearners.jpg';
+import earlyPhoto from '../assets/images/outdoorplay.jpg';
+import primaryPhoto from '../assets/images/collaborative-study.jpg';
+import secondaryPhoto from '../assets/images/labsciencestudents.jpg';
+import libraryPhoto from '../assets/images/librarysection.jpg';
+
+const cardSizes = '(max-width: 820px) 92vw, 30vw';
 ---
 <Layout
   title="Academics — Mt Cedar British International School"
@@ -15,20 +24,51 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
+<MediaText
+  image={introPhoto}
+  alt="Engaged Mt Cedar learners in a bright classroom"
+  eyebrow="Our Approach"
+  title="Where curiosity meets rigour."
+>
+  <p>At Mt Cedar, learning is active and personal. Small classes mean every child is known, challenged at the right level, and supported to reach further than they thought they could.</p>
+  <p>We pair British academic standards with warm, attentive teaching — so pupils build not just knowledge, but the confidence and habits to keep growing.</p>
+</MediaText>
+
 <section class="academics">
   <div class="wrap">
     <div class="sec-head"><p class="eyebrow">Our Programmes</p><h2>Every stage, thoughtfully designed.</h2><p>Three connected stages that carry each child from playful early learning to confident, examination-ready study.</p></div>
     <div class="prog">
-      <div class="pcard"><div class="age">Ages 2–5</div><h3>Early Years</h3><p>A warm, play-led start where curiosity, language and confidence take shape through structured discovery. Children learn to explore, share and think for themselves in a caring, secure environment.</p></div>
-      <div class="pcard"><div class="age">Ages 5–11</div><h3>Primary</h3><p>Strong foundations in literacy, numeracy and enquiry, with specialist teaching in the arts, science and sport. Pupils build knowledge and the study habits that carry them forward.</p></div>
-      <div class="pcard"><div class="age">Ages 11–16</div><h3>Secondary</h3><p>Rigorous, examination-ready study that stretches able minds and prepares students for the wider world — with the pastoral support to help every learner thrive.</p></div>
+      <div class="pcard has-media">
+        <div class="pcard-media"><Image src={earlyPhoto} alt="Young children at outdoor play" widths={[400, 640, 900]} sizes={cardSizes} format="webp" quality={72} loading="lazy" /></div>
+        <div class="pcard-in"><div class="age">Ages 2–5</div><h3>Early Years</h3><p>A warm, play-led start where curiosity, language and confidence take shape through structured discovery.</p></div>
+      </div>
+      <div class="pcard has-media">
+        <div class="pcard-media"><Image src={primaryPhoto} alt="Primary pupils in collaborative study" widths={[400, 640, 900]} sizes={cardSizes} format="webp" quality={72} loading="lazy" /></div>
+        <div class="pcard-in"><div class="age">Ages 5–11</div><h3>Primary</h3><p>Strong foundations in literacy, numeracy and enquiry, with specialist teaching in the arts, science and sport.</p></div>
+      </div>
+      <div class="pcard has-media">
+        <div class="pcard-media"><Image src={secondaryPhoto} alt="Secondary students in a science lab" widths={[400, 640, 900]} sizes={cardSizes} format="webp" quality={72} loading="lazy" /></div>
+        <div class="pcard-in"><div class="age">Ages 11–16</div><h3>Secondary</h3><p>Rigorous, examination-ready study that stretches able minds and prepares students for the wider world.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
+<MediaText
+  image={libraryPhoto}
+  alt="The library at Mt Cedar British International School"
+  eyebrow="Beyond the Textbook"
+  title="A curriculum that goes further."
+  reverse={true}
+  background="var(--ivory-2)"
+>
+  <p>Reading, research and independent thinking sit at the heart of a Mt Cedar education. Our library and learning spaces give pupils room to explore ideas, follow their questions, and build a genuine love of learning.</p>
+  <p>Specialist lessons in the arts, science and sport round out a broad, balanced education for every stage.</p>
+</MediaText>
+
 <section>
   <div class="wrap">
-    <div class="sec-head"><p class="eyebrow">Our Approach</p><h2>How we teach at Mt Cedar.</h2><p>British rigour, small classes, and a genuine knowledge of every child.</p></div>
+    <div class="sec-head"><p class="eyebrow">Why Mt Cedar</p><h2>How we teach.</h2><p>British rigour, small classes, and a genuine knowledge of every child.</p></div>
     <div class="feat-grid">
       <div class="feat">
         <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v13"/><path d="M6 17h12v4H6a2 2 0 0 1 0-4Z"/></svg></div>

@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import hero0 from '../assets/images/hero.jpg';
+import hero1 from '../assets/images/hero1.jpg';
+import hero2 from '../assets/images/hero2.jpg';
+import hero3 from '../assets/images/hero3.jpg';
+import hero4 from '../assets/images/hero4.jpg';
+
+const slides = [
+  { src: hero0, alt: 'Mt Cedar pupils and teachers on campus' },
+  { src: hero1, alt: 'Students engaged in a bright, modern classroom' },
+  { src: hero2, alt: 'Children learning together at Mt Cedar' },
+  { src: hero3, alt: 'Mt Cedar school life in Benin City' },
+  { src: hero4, alt: 'Confident young learners at Mt Cedar' },
+];
+---
+<section class="hero-carousel" aria-label="Featured images of Mt Cedar">
+  <div class="hc-slides" aria-hidden="true">
+    {slides.map((s, i) => (
+      <div class={`hc-slide${i === 0 ? ' is-active' : ''}`}>
+        <Image
+          src={s.src}
+          alt={s.alt}
+          widths={[768, 1200, 1672]}
+          sizes="100vw"
+          format="webp"
+          quality={70}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : 'auto'}
+        />
+      </div>
+    ))}
+  </div>
+  <div class="hc-overlay" aria-hidden="true"></div>
+  <div class="hc-content">
+    <slot />
+  </div>
+  <div class="hc-dots" role="tablist" aria-label="Choose slide">
+    {slides.map((_, i) => (
+      <button
+        type="button"
+        class={`hc-dot${i === 0 ? ' is-active' : ''}`}
+        role="tab"
+        aria-label={`Show image ${i + 1} of ${slides.length}`}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        data-idx={i}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector('.hero-carousel');
+  if (root) {
+    const slides = Array.from(root.querySelectorAll('.hc-slide'));
+    const dots = Array.from(root.querySelectorAll('.hc-dot'));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DWELL = 6000;
+    let i = 0;
+    let timer = 0;
+
+    function go(n: number) {
+      slides[i]?.classList.remove('is-active');
+      dots[i]?.classList.remove('is-active');
+      dots[i]?.setAttribute('aria-selected', 'false');
+      i = (n + slides.length) % slides.length;
+      slides[i]?.classList.add('is-active');
+      dots[i]?.classList.add('is-active');
+      dots[i]?.setAttribute('aria-selected', 'true');
+    }
+    function next() { go(i + 1); }
+    function start() { if (reduce) return; stop(); timer = window.setInterval(next, DWELL); }
+    function stop() { if (timer) { clearInterval(timer); timer = 0; } }
+
+    dots.forEach((d, idx) =>
+      d.addEventListener('click', () => { go(idx); start(); })
+    );
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', () =>
+      document.hidden ? stop() : start()
+    );
+    start();
+  }
+</script>

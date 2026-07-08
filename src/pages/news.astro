@@ -1,5 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import imgAdmissions from '../assets/images/engagedlearners.jpg';
+import imgFounders from '../assets/images/culturalattireday.jpg';
+import imgScience from '../assets/images/sciencepupils.jpg';
+import imgGames from '../assets/images/outdoorplay.jpg';
+import imgArts from '../assets/images/artandcraftpupils.jpg';
+import imgParents from '../assets/images/teacher-pupil-connection.jpg';
+
+const posts = [
+  { img: imgAdmissions, alt: 'Engaged Mt Cedar learners in class', tag: 'Admissions', title: '2026/2027 admissions are now open', body: 'Enrolment for the new session has begun across all stages. Book a visit to see the school for yourself.' },
+  { img: imgFounders, alt: 'Pupils in cultural attire celebrating together', tag: 'Event', title: 'Founder’s Day & cultural showcase', body: 'A celebration of learning, character and community — pupils, parents and staff together.' },
+  { img: imgScience, alt: 'Young scientists presenting projects', tag: 'Achievement', title: 'Our pupils shine in the science fair', body: 'Young scientists present projects rooted in curiosity, care and real-world problem solving.' },
+  { img: imgGames, alt: 'Children playing sport outdoors', tag: 'Sport', title: 'Inter-house games bring the school together', body: 'A morning of friendly competition, teamwork and cheering — character in full flow on the field.' },
+  { img: imgArts, alt: 'Pupils performing and making art', tag: 'Arts', title: 'Young voices take the stage', body: 'Music and drama from across the year groups, as pupils grow in confidence and creativity.' },
+  { img: imgParents, alt: 'A teacher meeting with a pupil', tag: 'Community', title: 'Parents’ morning at Mt Cedar', body: 'Families join us to see learning in action and partner with teachers in their children’s progress.' },
+];
+
+const thumbSizes = '(max-width: 820px) 92vw, 30vw';
 ---
 <Layout
   title="News & Events — Mt Cedar British International School"
@@ -18,12 +36,18 @@ import Layout from '../layouts/Layout.astro';
 <section class="news news-page">
   <div class="wrap">
     <div class="grid3">
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Admissions</span><h3>2026/2027 admissions are now open</h3><p>Enrolment for the new session has begun across all stages. Book a visit to see the school for yourself.</p></div></article>
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Event</span><h3>Founder’s Day &amp; cultural showcase</h3><p>A celebration of learning, character and community — pupils, parents and staff together.</p></div></article>
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Achievement</span><h3>Our pupils shine in the science fair</h3><p>Young scientists present projects rooted in curiosity, care and real-world problem solving.</p></div></article>
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Sport</span><h3>Inter-house games bring the school together</h3><p>A morning of friendly competition, teamwork and cheering — character in full flow on the field.</p></div></article>
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Arts</span><h3>Young voices take the stage</h3><p>Music and drama from across the year groups, as pupils grow in confidence and creativity.</p></div></article>
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Community</span><h3>Parents’ morning at Mt Cedar</h3><p>Families join us to see learning in action and partner with teachers in their children’s progress.</p></div></article>
+      {posts.map((post) => (
+        <article class="ncard">
+          <div class="thumb">
+            <Image src={post.img} alt={post.alt} widths={[400, 640, 900]} sizes={thumbSizes} format="webp" quality={72} loading="lazy" />
+          </div>
+          <div class="body">
+            <span class="tag">{post.tag}</span>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>

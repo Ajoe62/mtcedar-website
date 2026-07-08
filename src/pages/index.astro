@@ -1,28 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import { Image } from 'astro:assets';
+import welcomePhoto from '../assets/images/teacher-pupil-connection.jpg';
+import newsAdmissions from '../assets/images/engagedlearners.jpg';
+import newsFounders from '../assets/images/culturalattireday.jpg';
+import newsScience from '../assets/images/sciencepupils.jpg';
+
+const thumbSizes = '(max-width: 820px) 92vw, 30vw';
 ---
 <Layout
   title="Mt Cedar British International School — Benin City"
   active=""
 >
 
-<section class="hero">
-  <div class="wrap">
-    <div class="reveal">
-      <p class="eyebrow">British International School · Benin City</p>
-      <h1>Where character takes root and <em>excellence</em> grows.</h1>
-      <p class="lead">A British-curriculum education for the nursery, primary and secondary years — nurturing confident, principled young people in the heart of Edo State.</p>
-      <div class="cta">
-        <a class="btn btn-gold btn-lg" href="/admissions">Begin an Application <span class="arr">→</span></a>
-        <a class="btn btn-ghost btn-lg" href="/about">Discover the School</a>
-      </div>
-      <div class="motto"><span></span>Committed to Excellence, Character and Growth</div>
-    </div>
-    <div class="crest-card reveal">
-      <div class="crest-ring"><img src="/logo.jpg" alt="Mt Cedar British International School crest" width="340" height="340" /></div>
-    </div>
+<HeroCarousel>
+  <p class="eyebrow">British International School · Benin City</p>
+  <h1>Where character takes root and <em>excellence</em> grows.</h1>
+  <p class="lead">A British-curriculum education for the nursery, primary and secondary years — nurturing confident, principled young people in the heart of Edo State.</p>
+  <div class="cta">
+    <a class="btn btn-gold btn-lg" href="/admissions">Begin an Application <span class="arr">→</span></a>
+    <a class="btn btn-ghost btn-lg" href="/about">Discover the School</a>
   </div>
-</section>
+  <div class="motto"><span></span>Committed to Excellence, Character and Growth</div>
+</HeroCarousel>
 
 <div class="facts">
   <div class="wrap">
@@ -35,7 +36,9 @@ import Layout from '../layouts/Layout.astro';
 
 <section class="welcome">
   <div class="wrap">
-    <div class="photo"><span>School photograph — to be added</span></div>
+    <div class="photo">
+      <Image src={welcomePhoto} alt="A Mt Cedar teacher supporting a pupil in class" widths={[480, 768, 1100]} sizes="(max-width: 820px) 92vw, 46vw" format="webp" quality={74} loading="lazy" />
+    </div>
     <div>
       <p class="eyebrow">Welcome to Mt Cedar</p>
       <h2>An education that shapes the whole child.</h2>
@@ -78,9 +81,9 @@ import Layout from '../layouts/Layout.astro';
       <a class="btn btn-cedar" href="/news">View all news <span class="arr">→</span></a>
     </div>
     <div class="grid3">
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Admissions</span><h3>2026/2027 admissions are now open</h3><p>Enrolment for the new session has begun across all stages. Book a visit to see the school for yourself.</p></div></article>
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Event</span><h3>Founder’s Day &amp; cultural showcase</h3><p>A celebration of learning, character and community — pupils, parents and staff together.</p></div></article>
-      <article class="ncard"><div class="thumb"></div><div class="body"><span class="tag">Achievement</span><h3>Our pupils shine in the science fair</h3><p>Young scientists present projects rooted in curiosity, care and real-world problem solving.</p></div></article>
+      <article class="ncard"><div class="thumb"><Image src={newsAdmissions} alt="Engaged Mt Cedar learners in class" widths={[400, 640, 900]} sizes={thumbSizes} format="webp" quality={72} loading="lazy" /></div><div class="body"><span class="tag">Admissions</span><h3>2026/2027 admissions are now open</h3><p>Enrolment for the new session has begun across all stages. Book a visit to see the school for yourself.</p></div></article>
+      <article class="ncard"><div class="thumb"><Image src={newsFounders} alt="Pupils in cultural attire celebrating together" widths={[400, 640, 900]} sizes={thumbSizes} format="webp" quality={72} loading="lazy" /></div><div class="body"><span class="tag">Event</span><h3>Founder’s Day &amp; cultural showcase</h3><p>A celebration of learning, character and community — pupils, parents and staff together.</p></div></article>
+      <article class="ncard"><div class="thumb"><Image src={newsScience} alt="Young scientists at work" widths={[400, 640, 900]} sizes={thumbSizes} format="webp" quality={72} loading="lazy" /></div><div class="body"><span class="tag">Achievement</span><h3>Our pupils shine in the science fair</h3><p>Young scientists present projects rooted in curiosity, care and real-world problem solving.</p></div></article>
     </div>
   </div>
 </section>

@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import MediaText from '../components/MediaText.astro';
+import { Image } from 'astro:assets';
+import headPhoto from '../assets/images/head-of-school.jpg';
+import storyPhoto from '../assets/images/culturalattireday.jpg';
 ---
 <Layout
   title="About — Mt Cedar British International School"
@@ -17,7 +21,9 @@ import Layout from '../layouts/Layout.astro';
 
 <section class="welcome">
   <div class="wrap">
-    <div class="photo"><span>School photograph — to be added</span></div>
+    <div class="photo">
+      <Image src={headPhoto} alt="The Head of School at Mt Cedar British International School" widths={[480, 768, 1100]} sizes="(max-width: 820px) 92vw, 46vw" format="webp" quality={76} loading="lazy" />
+    </div>
     <div>
       <p class="eyebrow">Welcome to Mt Cedar</p>
       <h2>A warm word from the Head of School.</h2>
@@ -27,24 +33,20 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<section>
-  <div class="wrap two-col">
-    <div class="lead-copy">
-      <p class="eyebrow">Our Story</p>
-      <h2 style="font-size:clamp(1.7rem,3vw,2.3rem);margin:.5rem 0 1.1rem">Named for the cedar — rooted deep, reaching high.</h2>
-      <p>Mt Cedar British International School was founded on a simple conviction: that children flourish when high academic expectations are matched by genuine care for who they are becoming. We take our name from the cedar — a tree prized for standing firm through every season while growing tall and strong.</p>
-      <p>Set in the Obaretin community of Ikpoba-Okha, Benin City, we bring the British curriculum to Edo State, taught by caring teachers in small, focused classes and adapted thoughtfully for our Nigerian context. From the nursery years through secondary school, every stage is designed to build confidence, curiosity and character.</p>
-      <p>We are a young school with a clear purpose, and we would love to welcome your family to it.</p>
-      <div class="cta" style="margin-top:1.4rem">
-        <a class="btn btn-cedar" href="/admissions">Explore Admissions <span class="arr">→</span></a>
-        <a class="btn btn-outline" href="/contact">Arrange a Visit</a>
-      </div>
-    </div>
-    <div class="crest-card" style="justify-self:center">
-      <div class="crest-ring" style="--_x:0"><img src="/logo.jpg" alt="Mt Cedar crest" width="300" height="300" /></div>
-    </div>
+<MediaText
+  image={storyPhoto}
+  alt="Mt Cedar pupils celebrating cultural attire day"
+  eyebrow="Our Story"
+  title="Named for the cedar — rooted deep, reaching high."
+  reverse={true}
+>
+  <p>Mt Cedar British International School was founded on a simple conviction: that children flourish when high academic expectations are matched by genuine care for who they are becoming. We take our name from the cedar — a tree prized for standing firm through every season while growing tall and strong.</p>
+  <p>Set in the Obaretin community of Ikpoba-Okha, Benin City, we bring the British curriculum to Edo State, taught by caring teachers in small, focused classes and adapted thoughtfully for our Nigerian context.</p>
+  <div class="cta">
+    <a class="btn btn-cedar" href="/admissions">Explore Admissions <span class="arr">→</span></a>
+    <a class="btn btn-outline" href="/contact">Arrange a Visit</a>
   </div>
-</section>
+</MediaText>
 
 <section class="values" style="background:var(--ivory-2)">
   <div class="wrap">
