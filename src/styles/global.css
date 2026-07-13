@@ -96,13 +96,13 @@
   @media(max-width:820px){.welcome .wrap{grid-template-columns:1fr}}
 
   /* values (crest symbols) */
-  .values .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.6rem}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.6rem}
   .vcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2rem 1.7rem;transition:transform .2s,box-shadow .2s}
   .vcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(18,60,40,.12)}
   .vcard .ic{width:52px;height:52px;color:var(--cedar);background:rgba(195,150,48,.14);border-radius:12px;display:grid;place-items:center;margin-bottom:1.1rem}
   .vcard h3{font-size:1.35rem}
   .vcard p{color:var(--muted);margin:.5rem 0 0;font-size:.98rem}
-  @media(max-width:820px){.values .wrap{grid-template-columns:1fr}}
+  @media(max-width:820px){.values-grid{grid-template-columns:1fr}}
 
   /* academics */
   .academics{background:var(--cedar);color:#eee6d4}
