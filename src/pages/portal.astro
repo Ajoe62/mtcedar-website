@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PortalCard from '../components/PortalCard.astro';
+import { portalHref, portalLive } from '../config/portal.js';
+---
+<Layout
+  title="Portal — Mt Cedar British International School"
+  description="The Mt Cedar portal: sign in to sit an assessment, open your lessons, or reach the staff dashboard. Students sign in with a username and access code issued by the school."
+  active="portal"
+>
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Mt Cedar Portal</p>
+    <h1>One door to your work.</h1>
+    <p>Assessments, lessons and results in one place. Students sign in with the username and access code issued by the school — there is no account to create and no password to forget.</p>
+  </div>
+</section>
+
+{!portalLive && (
+  <section class="slim notice-band">
+    <div class="wrap">
+      <p><strong>The portal is being prepared.</strong> Logins are issued class by class. Your child’s teacher will send home a printed sheet with their username and access code before it opens — nothing needs to be set up at home.</p>
+    </div>
+  </section>
+)}
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">For Students</p><h2>Where do I go?</h2><p>The same username and access code work in both places. Keep the printed sheet somewhere safe.</p></div>
+    <div class="feat-grid">
+      <PortalCard
+        title="Sit an assessment"
+        href={portalHref('exam')}
+        action="Go to assessments"
+        meta="Username + access code"
+      >
+        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1Z"/><path d="M8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="m9 13 2 2 4-4"/></svg>
+        Objective questions are marked the moment you submit. Written answers are marked with AI assistance and checked by your teacher before the score counts.
+      </PortalCard>
+
+      <PortalCard
+        title="Open my lessons"
+        href={portalHref('lessons')}
+        action="Go to lessons"
+        meta="Works offline once opened"
+      >
+        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 7c-1.8-1.3-4-2-6.5-2H3v13h2.5c2.5 0 4.7.7 6.5 2 1.8-1.3 4-2 6.5-2H21V5h-2.5C16 5 13.8 5.7 12 7Z"/><path d="M12 7v13"/></svg>
+        Lesson summaries and practice questions your teachers publish. Once a lesson has loaded it stays readable without data, so it works on the way home.
+      </PortalCard>
+
+      <PortalCard
+        title="Check a result"
+        href={portalHref('results')}
+        action="Look up a result"
+        meta="Released term by term"
+      >
+        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+        Term result sheets are prepared by the school and released after each term. Until online lookup opens, sheets are issued directly by the school office — <a href="/portal/help#results">how results are issued</a>.
+      </PortalCard>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--ivory-2)">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">For Staff</p><h2>Teachers and administrators.</h2><p>Staff sign in with an email address and password, not an access code.</p></div>
+    <div class="feat-grid two">
+      <PortalCard
+        title="Assessments &amp; results dashboard"
+        href={portalHref('staffResultPeak')}
+        action="Staff sign in"
+        meta="Tutors and school administrators"
+      >
+        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Build exams, review AI-marked written answers, manage your class roster and produce the term result sheets.
+      </PortalCard>
+
+      <PortalCard
+        title="Lesson authoring"
+        href={portalHref('staffLearn')}
+        action="Tutor sign in"
+        meta="Draft, review, publish"
+      >
+        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21v-3.5L15.5 6a2.1 2.1 0 0 1 3 3L7 20.5 3.5 21Z"/><path d="M14 7.5 17.5 11"/></svg>
+        Upload a lesson and get a student summary, practice questions and a marking guide back. Nothing reaches students until you have edited and published it.
+      </PortalCard>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Signing In</p><h2>Three things, in order.</h2><p>Designed to work on a shared phone with a weak signal — no app to install, no email address required.</p></div>
+    <div class="steps">
+      <div class="step">
+        <h3>Get the sheet</h3>
+        <p>The class teacher issues a printed sheet listing each child’s username and six-character access code. It comes from the school, never by text message.</p>
+      </div>
+      <div class="step">
+        <h3>Pick the right door</h3>
+        <p>Assessments and lessons are two different places, but they take the same two details. Choose from the cards above.</p>
+      </div>
+      <div class="step">
+        <h3>Type the two details</h3>
+        <p>Username like <code>jss3-04</code>, then the access code. The school is already selected for you.</p>
+      </div>
+    </div>
+    <div class="cta" style="margin-top:2.4rem">
+      <a class="btn btn-cedar" href="/portal/help">Read the full sign-in guide <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--gold-bright)">Need a hand?</p>
+    <h2>Lost a code? Ask the school.</h2>
+    <p>Access codes are issued and reset by the school office — for your child’s safety we cannot send one over the phone without confirming who you are. Come in, or call and we will arrange it.</p>
+    <div class="cta">
+      <a class="btn btn-gold btn-lg" href="/contact">Contact the School <span class="arr">→</span></a>
+      <a class="btn btn-ghost btn-lg" href="/portal/help">Sign-in Guide</a>
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<style>
+  .notice-band {
+    background: rgba(195, 150, 48, 0.14);
+    border-bottom: 1px solid var(--line);
+  }
+  .notice-band p {
+    margin: 0;
+    color: var(--ink);
+    max-width: 78ch;
+  }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: rgba(18, 60, 40, 0.08);
+    border-radius: 5px;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.94em;
+  }
+</style>

@@ -224,3 +224,30 @@ section.slim{padding:3.6rem 0}
 .ncard .thumb{position:relative}
 .ncard .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
 .ncard:hover .thumb img{transform:scale(1.05)}
+
+/* ============================================================
+   Portal entry points
+   The .util bar itself is styled in global.css; these are the
+   hover/spacing details it never needed until now.
+   ============================================================ */
+.util .u-r a:hover{opacity:1;color:var(--gold-bright)}
+.util .u-r a.apply:hover{color:var(--cedar-deep);filter:brightness(1.06)}
+.util a:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px;border-radius:4px}
+@media(max-width:520px){
+  .util{font-size:.76rem}
+  .util .u-r{gap:.9rem}
+}
+
+/* homepage portal strip — sits between the values and news sections */
+.portal-strip{background:var(--cedar);color:#eee6d4;padding:3.4rem 0}
+.portal-strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.portal-strip .eyebrow{color:var(--gold-bright)}
+.portal-strip h2{color:#fbf6ea;font-size:clamp(1.5rem,2.6vw,2rem);margin-top:.5rem}
+.portal-strip p{color:#c9c0ac;margin:.7rem 0 0;max-width:56ch}
+.portal-strip .btn-outline{border-color:rgba(255,255,255,.5);color:#fbf6ea}
+.portal-strip .btn-outline:hover{background:rgba(255,255,255,.12);border-color:#fff}
+@media(max-width:820px){.portal-strip .wrap{flex-direction:column;align-items:flex-start}}
+
+/* footer bottom-bar links */
+.foot-b .foot-links{display:flex;gap:1.2rem}
+.foot-b .foot-links a:hover{color:var(--gold-bright)}

@@ -1,6 +1,11 @@
 ---
 import '../styles/global.css';
 import '../styles/enhance.css';
+import { portalHref } from '../config/portal.js';
+
+// Until the portal is live these fall back to the hub page, which explains
+// what is coming, rather than to a sign-in that would reject every visitor.
+const staffLogin = portalHref('staffResultPeak') ?? '/portal';
 
 const {
   title = 'Mt Cedar British International School - Benin City',
@@ -13,6 +18,7 @@ const nav = [
   { href: '/academics', label: 'Academics', key: 'academics' },
   { href: '/admissions', label: 'Admissions', key: 'admissions' },
   { href: '/school-life', label: 'School Life', key: 'school-life' },
+  { href: '/portal', label: 'Portal', key: 'portal' },
   { href: '/news', label: 'News', key: 'news' },
   { href: '/contact', label: 'Contact', key: 'contact' },
 ];
@@ -33,6 +39,17 @@ const nav = [
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
+
+<div class="util">
+  <div class="wrap">
+    <div class="u-l"><span>Obaretin, Ikpoba-Okha, Benin City</span></div>
+    <div class="u-r">
+      <a href="/portal/help">Sign-in help</a>
+      <a href={staffLogin}>Staff Login</a>
+      <a class="apply" href="/portal">Student Portal</a>
+    </div>
+  </div>
+</div>
 
 <header class="site">
   <div class="wrap">
@@ -80,11 +97,13 @@ const nav = [
       <a href="/academics">Academics</a>
       <a href="/admissions">Admissions</a>
       <a href="/school-life">School Life</a>
+      <a href="/portal">Student Portal</a>
+      <a href="/portal/help">Sign-in Guide</a>
       <a href="/news">News &amp; Events</a>
       <a href="/contact">Contact</a>
     </div>
   </div>
-  <div class="foot-b"><div class="wrap"><span>© 2026 Mt Cedar British International School</span><span>mtcedarbritishinternationalsch.com.ng</span></div></div>
+  <div class="foot-b"><div class="wrap"><span>© 2026 Mt Cedar British International School</span><span class="foot-links"><a href="/privacy">Privacy</a><a href="/for-schools">For Schools</a></span><span>mtcedarbritishinternationalsch.com.ng</span></div></div>
 </footer>
 
 <script>
