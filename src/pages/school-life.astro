@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import MediaText from '../components/MediaText.astro';
 import FullBleed from '../components/FullBleed.astro';
+import Facilities from '../components/Facilities.astro';
 import { Image } from 'astro:assets';
 import artsPhoto from '../assets/images/artandcraftpupils.jpg';
 import curiosityPhoto from '../assets/images/sciencepupils.jpg';
@@ -78,6 +79,12 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
 >
   <p>Founder’s Day, cultural showcases and everyday moments of togetherness. Mt Cedar is a warm community where pupils, parents and staff belong.</p>
 </FullBleed>
+
+<Facilities
+  background="var(--ivory-2)"
+  title="The spaces behind a full school day."
+  intro="A music studio and instruments, sports facilities and playing grounds, an art and craft studio, and well equipped Biology, Chemistry, Physics and Computer laboratories — every interest has somewhere to grow."
+/>
 
 <MediaText
   image={curiosityPhoto}

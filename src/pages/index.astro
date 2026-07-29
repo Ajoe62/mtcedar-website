@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
+import Facilities from '../components/Facilities.astro';
 import { Image } from 'astro:assets';
 import welcomePhoto from '../assets/images/teacher-pupil-connection.jpg';
 import newsAdmissions from '../assets/images/engagedlearners.jpg';
@@ -70,6 +71,11 @@ const thumbSizes = '(max-width: 820px) 92vw, 30vw';
     </div>
   </div>
 </section>
+
+<Facilities
+  background="var(--ivory-2)"
+  intro="Well equipped Biology, Chemistry, Physics and Computer laboratories, a music studio, sports facilities and more — the tools that turn lessons into real experience."
+/>
 
 <section class="news">
   <div class="wrap">

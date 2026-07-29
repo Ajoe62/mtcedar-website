@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import MediaText from '../components/MediaText.astro';
+import Facilities from '../components/Facilities.astro';
 import { Image } from 'astro:assets';
 import introPhoto from '../assets/images/engagedlearners.jpg';
 import earlyPhoto from '../assets/images/outdoorplay.jpg';
@@ -88,6 +89,12 @@ const cardSizes = '(max-width: 820px) 92vw, 30vw';
     </div>
   </div>
 </section>
+
+<Facilities
+  background="var(--ivory-2)"
+  title="Learning you can put your hands on."
+  intro="Well equipped Biology, Chemistry, Physics and Computer laboratories, a music studio, a stocked library and sports facilities — so lessons are practised, not only taught."
+/>
 
 <section class="band">
   <div class="wrap">
