@@ -1,7 +1,7 @@
 /**
  * Every link from this static site into the two applications.
  *
- * The site itself stays a plain Astro build on cPanel — it never talks to
+ * The site itself stays a plain static Astro build. It never talks to
  * Firebase and never holds a credential. It only points at the two Vercel
  * deployments, so this file is the whole integration surface.
  *
@@ -13,15 +13,15 @@
 /** Mt Cedar's slug in the shared Firebase project. Permanent once issued. */
 export const SCHOOL_SLUG = 'mt-cedar';
 
-/** ResultPeak AI — assessments, exams and result sheets. */
+/** ResultPeak AI: assessments, exams and result sheets. */
 export const PORTAL = 'https://portal.mtcedarbritishinternationalsch.com.ng';
 
-/** JDSmartLearn — lessons, summaries and practice questions. */
+/** JDSmartLearn: lessons, summaries and practice questions. */
 export const LEARN = 'https://learn.mtcedarbritishinternationalsch.com.ng';
 
 /**
  * Flip to true only once the school is onboarded in ResultPeak and the
- * readiness check is green — every active student holding a username and an
+ * readiness check is green, with every active student holding a username and an
  * access code, both subdomains resolving over HTTPS.
  *
  * While false, the portal cards render as "opening soon" and point nowhere.
@@ -40,7 +40,7 @@ export const resultLookupLive = false;
 export const links = {
   /** Student sign-in for an exam or assessment. */
   exam: `${PORTAL}/s/${SCHOOL_SLUG}`,
-  /** Student sign-in for lessons — same username and code as the exam portal. */
+  /** Student sign-in for lessons, using the same username and code as the exam portal. */
   lessons: `${LEARN}/s/${SCHOOL_SLUG}`,
   /** Standalone result lookup. Gated by resultLookupLive. */
   results: `${PORTAL}/results/lookup`,
@@ -52,7 +52,7 @@ export const links = {
 
 /**
  * Resolves a portal destination against the launch flags, so no page has to
- * repeat the conditional. Returns null when the destination is not live yet —
+ * repeat the conditional. Returns null when the destination is not live yet;
  * callers render a non-clickable card instead of a broken link.
  */
 export function portalHref(key) {
