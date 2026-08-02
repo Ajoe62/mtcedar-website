@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { portalLive } from '../../config/portal.js';
+import { resultLookupLive } from '../../config/portal.js';
 ---
 <Layout
   title="Sign-in Guide - Mt Cedar Portal"
@@ -36,7 +36,8 @@ import { portalLive } from '../../config/portal.js';
       </div>
 
       <h2 id="where">Which door to use</h2>
-      <p>Assessments and lessons are two separate places, and both take the same two details. <a href="/portal">The portal page</a> has a card for each, so start there rather than typing an address by hand.</p>
+      <p>The <strong>Student Portal</strong> link at the top of any page goes straight to Mt Cedar's own sign-in. The school is already chosen there, so your child types the username and access code and nothing else. Use that link rather than typing an address by hand.</p>
+      <p>Assessments and lessons are two separate places, and both take the same two details. <a href="/portal">The portal hub</a> lists every entry point, including the staff ones.</p>
       <p>Staff do not use a username and code. Teachers and administrators sign in with the email address and password the school issued them.</p>
 
       <h2 id="lost">If a code is lost</h2>
@@ -49,7 +50,7 @@ import { portalLive } from '../../config/portal.js';
       <p>Keep the browser you signed in with. Signing in again on a different phone is fine, but the offline copy of a lesson lives on the phone that opened it.</p>
 
       <h2 id="results">How results are issued</h2>
-      <p>Term result sheets are prepared by teachers and released by the school after each term is finalised. {portalLive ? 'Where online lookup is open, it shows only results the school has released, so a result you cannot see yet is one that has not been published.' : 'Online lookup is not open yet; sheets are issued directly by the school office.'}</p>
+      <p>Term result sheets are prepared by teachers and released by the school after each term is finalised. {resultLookupLive ? 'Online lookup shows only results the school has released, so a result you cannot see yet is one that has not been published.' : 'Online lookup is not open yet; sheets are issued directly by the school office.'}</p>
       <p>Objective answers are marked automatically. Written answers are marked with AI assistance and then reviewed by the teacher, and no score reaches a result sheet without a teacher having seen it.</p>
 
       <h2 id="safety">Keeping the login safe</h2>

@@ -1,6 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Facilities from '../components/Facilities.astro';
+import { portalHref } from '../config/portal.js';
+
+// The entrance assessment is sat on ResultPeak at the school's own address, so
+// the school is already selected. Null out of season, and the whole callout
+// disappears rather than sending an applicant into an empty sign-in.
+const entranceHref = portalHref('entrance');
 ---
 <Layout
   title="Admissions - Mt Cedar British International School"
@@ -34,11 +40,30 @@ import Facilities from '../components/Facilities.astro';
       </div>
       <div class="step">
         <h3>Enrol</h3>
-        <p>Complete the application, and we’ll guide you through assessment and registration so your child is ready to start with confidence.</p>
+        <p>Complete the application and sit the entrance assessment, and we’ll guide you through registration so your child is ready to start with confidence.</p>
       </div>
     </div>
   </div>
 </section>
+
+{entranceHref && (
+  <section class="slim">
+    <div class="wrap">
+      <div class="entrance">
+        <div>
+          <p class="eyebrow">Entrance Assessment</p>
+          <h2>Sitting the entrance assessment.</h2>
+          <p>Applicants to Primary and Secondary sit a short assessment online. Once your enquiry is under way, the school issues a username and access code for it. Mt Cedar is already selected on the page below, so your child types only those two details.</p>
+          <p class="entrance-note">No code yet? That is the normal order of things. Start with an enquiry and we will arrange one with you.</p>
+        </div>
+        <div class="entrance-act">
+          <a class="btn btn-cedar" href={entranceHref} rel="noopener">Sit the Entrance Assessment <span class="arr">→</span></a>
+          <a class="btn btn-outline" href="/contact">Request a Code</a>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
 
 <section style="background:var(--ivory-2)">
   <div class="wrap two-col">
@@ -77,3 +102,51 @@ import Facilities from '../components/Facilities.astro';
 </section>
 
 </Layout>
+
+<style>
+  /* Sits on the same white background as the steps above it, so it needs its
+     own border to read as a distinct action rather than more prose. */
+  .entrance {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 2.4rem;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--gold);
+    border-radius: 16px;
+    padding: 2.2rem 2rem;
+    box-shadow: 0 18px 44px rgba(18, 60, 40, 0.08);
+  }
+  .entrance h2 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    margin: 0.4rem 0 0.9rem;
+  }
+  .entrance p {
+    color: var(--muted);
+    font-size: 1.04rem;
+    margin: 0 0 0.8rem;
+    max-width: 60ch;
+  }
+  .entrance-note {
+    font-size: 0.95rem !important;
+    color: var(--cedar) !important;
+    font-weight: 600;
+    margin: 0 !important;
+  }
+  .entrance-act {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .entrance-act .btn {
+    width: 100%;
+  }
+  @media (max-width: 820px) {
+    .entrance {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+      padding: 1.8rem 1.4rem;
+    }
+  }
+</style>

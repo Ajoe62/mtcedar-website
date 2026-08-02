@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PortalCard from '../components/PortalCard.astro';
-import { portalHref, portalLive } from '../config/portal.js';
+import { portalHref, lessonsLive } from '../config/portal.js';
 ---
 <Layout
   title="Portal - Mt Cedar British International School"
@@ -17,10 +17,10 @@ import { portalHref, portalLive } from '../config/portal.js';
   </div>
 </section>
 
-{!portalLive && (
+{!lessonsLive && (
   <section class="slim notice-band">
     <div class="wrap">
-      <p><strong>The portal is being prepared.</strong> Logins are issued class by class. Your child’s teacher will send home a printed sheet with their username and access code before it opens, so nothing needs to be set up at home.</p>
+      <p><strong>Assessments are open. Lessons are still being prepared.</strong> Your child signs in with the username and access code on the sheet issued by their class teacher. Lessons will open on those same two details, so nothing new needs to be set up at home.</p>
     </div>
   </section>
 )}
@@ -33,7 +33,7 @@ import { portalHref, portalLive } from '../config/portal.js';
         title="Sit an assessment"
         href={portalHref('exam')}
         action="Go to assessments"
-        meta="Username + access code"
+        meta="Mt Cedar already selected. Username + access code."
       >
         <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1Z"/><path d="M8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="m9 13 2 2 4-4"/></svg>
         Objective questions are marked the moment you submit. Written answers are marked with AI assistance and checked by your teacher before the score counts.
