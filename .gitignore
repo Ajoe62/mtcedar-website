@@ -21,6 +21,9 @@ pnpm-debug.log*
 # macOS
 .DS_Store
 
+# Windows / Git Bash crash artefacts
+*.stackdump
+
 # editor folders
 .idea/
 .vscode/*
