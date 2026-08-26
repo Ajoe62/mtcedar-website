@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Facilities from '../components/Facilities.astro';
+import Directions from '../components/Directions.astro';
 import { portalHref } from '../config/portal.js';
 
 // The entrance assessment is sat on ResultPeak at the school's own address, so
@@ -10,7 +11,7 @@ const entranceHref = portalHref('entrance');
 ---
 <Layout
   title="Admissions - Mt Cedar British International School"
-  description="Admissions for the 2026/2027 session are open at Mt Cedar British International School, Benin City, across Early Years, Primary and Secondary. See how to apply."
+  description="Admissions for the 2026/2027 session are open at Mt Cedar British International School, Benin City, from Nursery through Primary to Senior Secondary. See how to apply."
   active="admissions"
 >
 
@@ -18,7 +19,7 @@ const entranceHref = portalHref('entrance');
   <div class="wrap">
     <p class="eyebrow">Admissions 2026 / 2027</p>
     <h1>Come and see where your child will grow.</h1>
-    <p>Applications are open across Early Years, Primary and Secondary. Arrange a visit, meet our teachers, and feel the Mt Cedar difference in person.</p>
+    <p>Applications are open from Nursery through Primary to Senior Secondary. Arrange a visit, meet our teachers, and feel the Mt Cedar difference in person.</p>
     <div class="cta" style="margin-top:1.8rem">
       <a class="btn btn-gold btn-lg" href="/contact">Start an Enquiry <span class="arr">→</span></a>
       <a class="btn btn-ghost btn-lg" href="tel:+2349043729659">Call 0904 372 9659</a>
@@ -89,6 +90,12 @@ const entranceHref = portalHref('entrance');
 <Facilities
   title="What your child will have access to."
   intro="Come and see them on a visit: well equipped laboratories, a music studio, a library, an art and craft studio and sports facilities."
+/>
+
+<Directions
+  background="var(--ivory-2)"
+  title="Finding us on the day."
+  intro="Before you set out, here are the two landmark routes to the school. Save them for your visit."
 />
 
 <section class="band">
