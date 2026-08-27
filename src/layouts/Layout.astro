@@ -1,18 +1,18 @@
 ---
 import '../styles/global.css';
 import '../styles/enhance.css';
-import { portalHref } from '../config/portal.js';
-
-// Until a destination is live these fall back to the hub page, which explains
-// what is coming, rather than to a sign-in that would reject every visitor.
-const staffLogin = portalHref('staffResultPeak') ?? '/portal';
-
-// "Student Portal" goes straight to Mt Cedar's own front door on ResultPeak,
-// where the school is already selected and the child types only a username and
-// access code. The hub page stays linked from the footer and the sign-in guide.
-const studentPortal = portalHref('student') ?? '/portal';
-const studentExternal = studentPortal.startsWith('http');
-const studentAttrs = studentExternal ? { rel: 'noopener' } : {};
+// EVERY portal entry point on this site is an internal one now.
+//
+// The utility bar used to link straight out to ResultPeak, so the first screen
+// after clicking "Student Portal" carried another product's logo and asked for
+// a password. It reads as a third party's software because, at that moment, it
+// is one. Both links below stay on mtcedar...com.ng and land on a page wearing
+// the school's crest, which then names the application it hands you to. That
+// is also why nothing here imports portalHref: no outbound URL belongs in the
+// site chrome at all.
+const portalHome = '/portal';
+const staffPortal = '/portal/staff';
+const studentPortal = '/portal/students';
 
 const {
   title = 'Mt Cedar British International School - Benin City',
@@ -52,8 +52,8 @@ const nav = [
     <div class="u-l"><span>Obaretin, Ikpoba-Okha, Benin City</span></div>
     <div class="u-r">
       <a href="/portal/help">Sign-in help</a>
-      <a href={staffLogin}>Staff Login</a>
-      <a class="apply" href={studentPortal} {...studentAttrs}>Student Portal</a>
+      <a href={staffPortal}>Staff Login</a>
+      <a class="apply" href={portalHome}>Portal Sign-in</a>
     </div>
   </div>
 </div>
@@ -105,8 +105,9 @@ const nav = [
       <a href="/academics">Academics</a>
       <a href="/admissions">Admissions</a>
       <a href="/school-life">School Life</a>
-      <a href={studentPortal} {...studentAttrs}>Student Portal</a>
-      <a href="/portal">Portal Hub</a>
+      <a href={portalHome}>Portal Sign-in</a>
+      <a href={studentPortal}>Student Portal</a>
+      <a href={staffPortal}>Staff Portal</a>
       <a href="/portal/help">Sign-in Guide</a>
       <a href="/news">News &amp; Events</a>
       <a href="/contact">Contact</a>

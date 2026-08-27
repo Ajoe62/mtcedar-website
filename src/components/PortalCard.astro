@@ -13,9 +13,18 @@ interface Props {
   action?: string;
   meta?: string;
   external?: boolean;
+  /** Key into appFor(): renders the "this opens X" line under the action. */
+  app?: string | null;
 }
 
-const { title, href = null, action = 'Open', meta, external = true } = Astro.props;
+import { appFor } from '../config/portal.js';
+
+const { title, href = null, action = 'Open', meta, external = true, app = null } = Astro.props;
+// Only named on a card that actually leaves the site. Telling somebody they
+// are about to be handed to another application, by name, is what stops the
+// next screen reading as a stranger's website; saying it on a card that stays
+// on mtcedar...com.ng would just be noise.
+const handoff = href && String(href).startsWith('http') ? appFor(app) : null;
 const live = Boolean(href);
 const Tag = live ? 'a' : 'div';
 const attrs = live
@@ -30,6 +39,11 @@ const attrs = live
   <p class="pcard-action">
     {live ? <>{action} <span class="arr">→</span></> : <>Opening soon</>}
   </p>
+  {handoff && (
+    <p class="pcard-handoff">
+      Opens <strong>{handoff.name}</strong>, {handoff.role}.
+    </p>
+  )}
 </Tag>
 
 <style>
@@ -69,6 +83,16 @@ const attrs = live
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 0.72rem;
+  }
+  .pcard-handoff {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0.5rem 0 0;
+    line-height: 1.45;
+  }
+  .pcard-handoff strong {
+    color: var(--ink);
+    font-weight: 700;
   }
   .pcard-link .arr {
     transition: transform 0.2s ease;

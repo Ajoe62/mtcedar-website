@@ -1,113 +1,99 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PortalCard from '../components/PortalCard.astro';
-import { portalHref, lessonsLive } from '../config/portal.js';
+import { portalHref, lessonsLive, examLive } from '../config/portal.js';
+
+/**
+ * The chooser. Three doors, and nothing else on the page.
+ *
+ * This is where the "Portal" link in the header and the utility bar both land,
+ * and it exists to do one thing: let somebody say who they are before anything
+ * asks them for a credential. Previously the header sent students and staff
+ * straight out to two different applications, so the first screen either of
+ * them saw after leaving Mt Cedar was somebody else's product, with somebody
+ * else's logo on it, asking for a password.
+ *
+ * Students and staff each go on to a school-branded sub-page, because both
+ * groups have more than one destination, and choosing between two named cards
+ * under our own crest is a different experience from being dropped at a
+ * sign-in form. Administrators have exactly one destination, so their door
+ * goes straight there rather than through a page holding a single card.
+ */
+
+// Both student destinations run through their own live flag. If the two ever
+// go dark together the students door has nothing behind it, and saying so here
+// is better than sending a parent to a page of "opening soon" cards.
+const studentsReady = examLive || lessonsLive;
+const adminHref = portalHref('admin');
 ---
 <Layout
   title="Portal - Mt Cedar British International School"
-  description="The Mt Cedar portal: sign in to sit an assessment, open your lessons, or reach the staff dashboard. Students sign in with a username and access code issued by the school."
+  description="The Mt Cedar portal. Choose your door: students for lessons and assessments, staff for marking and lesson authoring, administrators for the school dashboard."
   active="portal"
 >
 
-<section class="page-hero">
+<section class="page-hero portal-hero">
   <div class="wrap">
+    <img class="portal-crest" src="/logo.jpg" alt="" width="76" height="76" />
     <p class="eyebrow">Mt Cedar Portal</p>
-    <h1>One door to your work.</h1>
-    <p>Assessments, lessons and results in one place. Students sign in with the username and access code issued by the school. There is no account to create and no password to forget.</p>
+    <h1>Who is signing in?</h1>
+    <p>Choose your door. Everything behind it belongs to Mt Cedar: your lessons, your assessments, your results and your class records.</p>
   </div>
 </section>
 
-{!lessonsLive && (
-  <section class="slim notice-band">
-    <div class="wrap">
-      <p><strong>Assessments are open. Lessons are still being prepared.</strong> Your child signs in with the username and access code on the sheet issued by their class teacher. Lessons will open on those same two details, so nothing new needs to be set up at home.</p>
-    </div>
-  </section>
-)}
-
-<section>
+<section class="doors-sec">
   <div class="wrap">
-    <div class="sec-head"><p class="eyebrow">For Students</p><h2>Where do I go?</h2><p>The same username and access code work in both places. Keep the printed sheet somewhere safe.</p></div>
-    <div class="feat-grid">
-      <PortalCard
-        title="Sit an assessment"
-        href={portalHref('exam')}
-        action="Go to assessments"
-        meta="Mt Cedar already selected. Username + access code."
-      >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1Z"/><path d="M8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="m9 13 2 2 4-4"/></svg>
-        Objective questions are marked the moment you submit. Written answers are marked with AI assistance and checked by your teacher before the score counts.
-      </PortalCard>
+    <div class="doors">
 
-      <PortalCard
-        title="Open my lessons"
-        href={portalHref('lessons')}
-        action="Go to lessons"
-        meta="Works offline once opened"
-      >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 7c-1.8-1.3-4-2-6.5-2H3v13h2.5c2.5 0 4.7.7 6.5 2 1.8-1.3 4-2 6.5-2H21V5h-2.5C16 5 13.8 5.7 12 7Z"/><path d="M12 7v13"/></svg>
-        Lesson summaries and practice questions your teachers publish. Once a lesson has loaded it stays readable without data, so it works on the way home.
-      </PortalCard>
+      <a class="door" href="/portal/students">
+        <span class="door-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="30" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+        </span>
+        <h2>Students</h2>
+        <p>Open your lessons, sit an assessment and check a result. You need the username and access code your class teacher gave you.</p>
+        <span class="door-go">{studentsReady ? 'Student door' : 'Opening soon'} <span class="arr">&rarr;</span></span>
+      </a>
 
-      <PortalCard
-        title="Check a result"
-        href={portalHref('results')}
-        action="Look up a result"
-        meta="Released term by term"
-      >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
-        Term result sheets are prepared by the school and released after each term. Until online lookup opens, sheets are issued directly by the school office. See <a href="/portal/help#results">how results are issued</a>.
-      </PortalCard>
+      <a class="door" href="/portal/staff">
+        <span class="door-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="30" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21v-3.5L15.5 6a2.1 2.1 0 0 1 3 3L7 20.5 3.5 21Z"/><path d="M14 7.5 17.5 11"/></svg>
+        </span>
+        <h2>Staff</h2>
+        <p>Teachers and tutors. Publish a lesson, mark written answers, take attendance and enter your class marks. You sign in with your school email address, not an access code.</p>
+        <span class="door-go">Staff door <span class="arr">&rarr;</span></span>
+      </a>
+
+      <a class="door door--admin" href={adminHref ?? '/portal/staff'} rel={adminHref ? 'noopener' : undefined}>
+        <span class="door-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="30" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        </span>
+        <h2>Administrators</h2>
+        <p>The school dashboard. Manage the roster and class lists, build the term's exams, release results and issue access codes.</p>
+        <span class="door-go">Administrator door <span class="arr">&rarr;</span></span>
+        <span class="door-note">Opens ResultPeak, the school's assessment and results system.</span>
+      </a>
+
     </div>
   </div>
 </section>
 
-<section style="background:var(--ivory-2)">
+<section class="slim reassure">
   <div class="wrap">
-    <div class="sec-head"><p class="eyebrow">For Staff</p><h2>Teachers and administrators.</h2><p>Staff sign in with an email address and password, not an access code.</p></div>
-    <div class="feat-grid two">
-      <PortalCard
-        title="Assessments &amp; results dashboard"
-        href={portalHref('staffResultPeak')}
-        action="Staff sign in"
-        meta="Tutors and school administrators"
-      >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
-        Build exams, review AI-marked written answers, manage your class roster and produce the term result sheets.
-      </PortalCard>
-
-      <PortalCard
-        title="Lesson authoring"
-        href={portalHref('staffLearn')}
-        action="Tutor sign in"
-        meta="Draft, review, publish"
-      >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21v-3.5L15.5 6a2.1 2.1 0 0 1 3 3L7 20.5 3.5 21Z"/><path d="M14 7.5 17.5 11"/></svg>
-        Upload a lesson and get a student summary, practice questions and a marking guide back. Nothing reaches students until you have edited and published it.
-      </PortalCard>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head"><p class="eyebrow">Signing In</p><h2>Three things, in order.</h2><p>Designed to work on a shared phone with a weak signal: no app to install, no email address required.</p></div>
-    <div class="steps">
-      <div class="step">
-        <h3>Get the sheet</h3>
-        <p>The class teacher issues a printed sheet listing each child’s username and six-character access code. It comes from the school, never by text message.</p>
+    <div class="reassure-grid">
+      <div>
+        <h3>One set of details</h3>
+        <p>A student's username and access code work in both places behind the students door. There is nothing extra to set up at home and no second account to create.</p>
       </div>
-      <div class="step">
-        <h3>Pick the right door</h3>
-        <p>Assessments and lessons are two different places, but they take the same two details. Choose from the cards above.</p>
+      <div>
+        <h3>Issued by the school</h3>
+        <p>Access codes come from the class teacher on a printed sheet, never by text message. Lost one? The school office reissues it once we have confirmed who you are.</p>
       </div>
-      <div class="step">
-        <h3>Type the two details</h3>
-        <p>Username like <code>jss3-04</code>, then the access code. The school is already selected for you.</p>
+      <div>
+        <h3>Where you end up</h3>
+        <p>Mt Cedar runs its lessons and its assessments on two specialist systems, JDSmartLearn and ResultPeak. Every card names the one it opens before you click it.</p>
       </div>
     </div>
-    <div class="cta" style="margin-top:2.4rem">
-      <a class="btn btn-cedar" href="/portal/help">Read the full sign-in guide <span class="arr">→</span></a>
+    <div class="cta" style="margin-top:2.2rem">
+      <a class="btn btn-cedar" href="/portal/help">Read the full sign-in guide <span class="arr">&rarr;</span></a>
     </div>
   </div>
 </section>
@@ -116,9 +102,9 @@ import { portalHref, lessonsLive } from '../config/portal.js';
   <div class="wrap">
     <p class="eyebrow" style="color:var(--gold-bright)">Need a hand?</p>
     <h2>Lost a code? Ask the school.</h2>
-    <p>Access codes are issued and reset by the school office. For your child’s safety we cannot send one over the phone without confirming who you are. Come in, or call and we will arrange it.</p>
+    <p>Access codes are issued and reset by the school office. For your child's safety we cannot send one over the phone without confirming who you are. Come in, or call and we will arrange it.</p>
     <div class="cta">
-      <a class="btn btn-gold btn-lg" href="/contact">Contact the School <span class="arr">→</span></a>
+      <a class="btn btn-gold btn-lg" href="/contact">Contact the School <span class="arr">&rarr;</span></a>
       <a class="btn btn-ghost btn-lg" href="/portal/help">Sign-in Guide</a>
     </div>
   </div>
@@ -127,20 +113,115 @@ import { portalHref, lessonsLive } from '../config/portal.js';
 </Layout>
 
 <style>
-  .notice-band {
-    background: rgba(195, 150, 48, 0.14);
-    border-bottom: 1px solid var(--line);
+  .portal-hero .wrap {
+    text-align: center;
   }
-  .notice-band p {
-    margin: 0;
-    color: var(--ink);
-    max-width: 78ch;
+  .portal-hero p {
+    margin-inline: auto;
   }
-  code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    background: rgba(18, 60, 40, 0.08);
-    border-radius: 5px;
-    padding: 0.1rem 0.35rem;
-    font-size: 0.94em;
+  .portal-crest {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    margin: 0 auto 1.1rem;
+    border: 2px solid rgba(224, 182, 74, 0.5);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .doors-sec {
+    padding-top: 3.4rem;
+  }
+  .doors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+  }
+  .door {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2.1rem 1.7rem 1.9rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .door:hover {
+    transform: translateY(-4px);
+    border-color: rgba(195, 150, 48, 0.55);
+    box-shadow: 0 18px 40px rgba(18, 60, 40, 0.14);
+  }
+  .door-ic {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: #fbf6ea;
+    background: linear-gradient(150deg, var(--cedar), var(--cedar-deep));
+    margin-bottom: 1.2rem;
+  }
+  .door--admin .door-ic {
+    background: linear-gradient(150deg, var(--oxblood), #5c1620);
+  }
+  .door h2 {
+    font-size: 1.5rem;
+  }
+  .door p {
+    color: var(--muted);
+    margin: 0.6rem 0 0;
+    font-size: 0.98rem;
+  }
+  .door-go {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 1.4rem;
+    font-weight: 800;
+    font-size: 0.92rem;
+    color: var(--cedar);
+  }
+  .door--admin .door-go {
+    color: var(--oxblood);
+  }
+  .door .arr {
+    transition: transform 0.2s ease;
+  }
+  .door:hover .arr {
+    transform: translateX(4px);
+  }
+  .door-note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    line-height: 1.45;
+  }
+  @media (max-width: 900px) {
+    .doors {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .reassure {
+    background: var(--ivory-2);
+  }
+  .reassure-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .reassure-grid h3 {
+    font-size: 1.14rem;
+  }
+  .reassure-grid p {
+    color: var(--muted);
+    margin: 0.5rem 0 0;
+    font-size: 0.97rem;
+  }
+  @media (max-width: 820px) {
+    .reassure-grid {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+    }
   }
 </style>
