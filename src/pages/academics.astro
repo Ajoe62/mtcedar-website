@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
 import MediaText from '../components/MediaText.astro';
 import Facilities from '../components/Facilities.astro';
-import { portalHref } from '../config/portal.js';
+import { portalHref } from '../config/integrations';
 import { Image } from 'astro:assets';
 
 // Same applicant registration the homepage hero points at.
@@ -20,7 +21,7 @@ import libraryPhoto from '../assets/images/librarysection.jpg';
 const cardSizes = '(max-width: 820px) 92vw, (max-width: 1080px) 46vw, 23vw';
 ---
 <Layout
-  title="Academics-Mt Cedar British International School"
+  title={`Academics-${site.name}`}
   description="British EYFS and Montessori in the Nursery, and the Nigerian Curriculum enriched with Cambridge from Primary to Senior Secondary, taught in small, focused classes at Mt Cedar British International School, Benin City."
   active="academics"
 >

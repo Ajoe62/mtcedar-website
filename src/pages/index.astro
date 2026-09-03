@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import Facilities from '../components/Facilities.astro';
-import { portalHref } from '../config/portal.js';
+import { portalHref } from '../config/integrations';
 import { Image } from 'astro:assets';
 
 // The hero's primary action goes straight to ResultPeak's applicant
@@ -18,7 +19,7 @@ import newsScience from '../assets/images/sciencepupils.jpg';
 const thumbSizes = '(max-width: 820px) 92vw, 30vw';
 ---
 <Layout
-  title="Mt Cedar British International School, Benin City"
+  title={`${site.name}, ${site.address.city}`}
   active=""
 >
 

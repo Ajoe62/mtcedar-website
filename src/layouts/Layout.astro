@@ -16,37 +16,43 @@ import '../system/styles/tokens.css';
 import '../system/styles/reset.css';
 import '../system/styles/primitives.css';
 import '../system/styles/blocks.css';
-// EVERY portal entry point on this site is an internal one now.
+
+// The same discipline, applied to words instead of colours. Nothing about this
+// school is written into the chrome below: the name, the crest, the address,
+// the numbers, the nav and the year all come from config, so standing up the
+// next school is an edit to src/config and not a search through src/.
+import { site, addressLine, mapsUrl, tel, apexDomain } from '../config/site';
+import { featureEnabled } from '../config/features';
+
+// EVERY portal entry point on this site is an internal one.
 //
 // The utility bar used to link straight out to ResultPeak, so the first screen
 // after clicking "Student Portal" carried another product's logo and asked for
 // a password. It reads as a third party's software because, at that moment, it
-// is one. Both links below stay on mtcedar...com.ng and land on a page wearing
-// the school's crest, which then names the application it hands you to. That
-// is also why nothing here imports portalHref: no outbound URL belongs in the
-// site chrome at all.
+// is one. Both links below stay on the school's own domain and land on a page
+// wearing its crest, which then names the application it hands you to. That is
+// also why nothing here imports portalHref: no outbound URL belongs in the site
+// chrome at all.
 const portalHome = '/portal';
 const staffPortal = '/portal/staff';
 const studentPortal = '/portal/students';
 
 const {
-  title = 'Mt Cedar British International School - Benin City',
-  description = 'A school in Benin City, Edo State combining the British EYFS with Montessori in the Nursery, and the Nigerian Curriculum enriched with Cambridge from Primary to Senior Secondary. Committed to Excellence, Character and Growth.',
+  title = site.defaultTitle,
+  description = site.defaultDescription,
   active = '',
 } = Astro.props;
 
-const nav = [
-  { href: '/about', label: 'About', key: 'about' },
-  { href: '/academics', label: 'Academics', key: 'academics' },
-  { href: '/admissions', label: 'Admissions', key: 'admissions' },
-  { href: '/school-life', label: 'School Life', key: 'school-life' },
-  { href: '/portal', label: 'Portal', key: 'portal' },
-  { href: '/news', label: 'News', key: 'news' },
-  { href: '/contact', label: 'Contact', key: 'contact' },
-];
+// Filtered once, used three times. A link that survives its feature being
+// switched off is a 404 with a signpost pointing at it, and the way that
+// happens is a header list and a footer list maintained separately.
+const nav = site.nav.filter((item) => featureEnabled(item.feature));
+const footerLinks = site.footerLinks.filter((item) => featureEnabled(item.feature));
+const legalLinks = site.legalLinks.filter((item) => featureEnabled(item.feature));
+const portalEnabled = featureEnabled('portal');
 ---
 <!doctype html>
-<html lang="en">
+<html lang={site.locale}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -64,11 +70,11 @@ const nav = [
 
 <div class="util">
   <div class="wrap">
-    <div class="u-l"><span>Obaretin, Ikpoba-Okha, Benin City</span></div>
+    <div class="u-l"><span>{site.address.short}</span></div>
     <div class="u-r">
-      <a href="/portal/help">Sign-in help</a>
-      <a href={staffPortal}>Staff Login</a>
-      <a class="apply" href={portalHome}>Portal Sign-in</a>
+      {portalEnabled && <a href="/portal/help">Sign-in help</a>}
+      {portalEnabled && <a href={staffPortal}>Staff Login</a>}
+      {portalEnabled && <a class="apply" href={portalHome}>{site.ctas.portal.label}</a>}
     </div>
   </div>
 </div>
@@ -76,22 +82,22 @@ const nav = [
 <header class="site">
   <div class="wrap">
     <a class="brand" href="/">
-      <img src="/logo.jpg" alt="Mt Cedar British International School crest" width="46" height="46" />
-      <span><b>Mt Cedar</b><small>British International School</small></span>
+      <img src={site.logo.src} alt={site.logo.alt} width="46" height="46" />
+      <span><b>{site.shortName}</b><small>{site.descriptor}</small></span>
     </a>
     <nav class="main">
       {nav.map((item) => (
         <a href={item.href} class={active === item.key ? 'is-active' : ''}>{item.label}</a>
       ))}
     </nav>
-    <a class="btn btn-gold" href="/admissions">Book a Visit</a>
+    <a class="btn btn-gold" href={site.ctas.visit.href}>{site.ctas.visit.label}</a>
     <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false" id="menuBtn">☰</button>
   </div>
   <nav class="mobile-nav" id="mobileNav">
     {nav.map((item) => (
       <a href={item.href} class={active === item.key ? 'is-active' : ''}>{item.label}</a>
     ))}
-    <a class="btn btn-gold" href="/admissions">Book a Visit</a>
+    <a class="btn btn-gold" href={site.ctas.visit.href}>{site.ctas.visit.label}</a>
   </nav>
 </header>
 
@@ -101,34 +107,24 @@ const nav = [
   <div class="wrap">
     <div class="fbrand">
       <a class="brand" href="/">
-        <img src="/logo.jpg" alt="Mt Cedar crest" width="46" height="46" />
-        <span><b>Mt Cedar</b><small>British International School</small></span>
+        <img src={site.logo.src} alt={`${site.shortName} crest`} width="46" height="46" />
+        <span><b>{site.shortName}</b><small>{site.descriptor}</small></span>
       </a>
-      <p>Committed to Excellence, Character and Growth. British EYFS and Montessori in the Nursery, the Nigerian Curriculum enriched with Cambridge from Primary to Senior Secondary, in Benin City, Edo State.</p>
+      <p>{site.footerBlurb}</p>
     </div>
     <div>
       <h4>Visit &amp; Contact</h4>
-      <a href="https://maps.google.com/?q=7+Saturday+Imasuen+Street+Rubber+Research+Junction+Obaretin+Ikpoba-Okha+Benin+City" target="_blank" rel="noopener">7 Saturday Imasuen Street, Close to Rubber Research Junction, Obaretin Community, Ikpoba-Okha LGA, Benin City, Edo State</a>
+      <a href={mapsUrl} target="_blank" rel="noopener">{addressLine}</a>
       <a href="/contact#directions">Directions to the school</a>
-      <a href="tel:+2348056733071">0805 673 3071</a>
-      <a href="tel:+2349043729659">0904 372 9659</a>
-      <a href="mailto:mtcedarbritishinternationalsch@gmail.com">mtcedarbritishinternationalsch@gmail.com</a>
+      {site.phones.map((phone, i) => <a href={tel(i)}>{phone.display}</a>)}
+      <a href={`mailto:${site.email}`}>{site.email}</a>
     </div>
     <div>
       <h4>Explore</h4>
-      <a href="/about">About the School</a>
-      <a href="/academics">Academics</a>
-      <a href="/admissions">Admissions</a>
-      <a href="/school-life">School Life</a>
-      <a href={portalHome}>Portal Sign-in</a>
-      <a href={studentPortal}>Student Portal</a>
-      <a href={staffPortal}>Staff Portal</a>
-      <a href="/portal/help">Sign-in Guide</a>
-      <a href="/news">News &amp; Events</a>
-      <a href="/contact">Contact</a>
+      {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
     </div>
   </div>
-  <div class="foot-b"><div class="wrap"><span>© 2026 Mt Cedar British International School</span><span class="foot-links"><a href="/privacy">Privacy</a><a href="/for-schools">For Schools</a></span><span>mtcedarbritishinternationalsch.com.ng</span></div></div>
+  <div class="foot-b"><div class="wrap"><span>© {site.copyrightYear} {site.name}</span><span class="foot-links">{legalLinks.map((item) => <a href={item.href}>{item.label}</a>)}</span><span>{apexDomain}</span></div></div>
 </footer>
 
 <script>

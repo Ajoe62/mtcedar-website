@@ -17,7 +17,7 @@ interface Props {
   app?: string | null;
 }
 
-import { appFor } from '../config/portal.js';
+import { appFor } from '../config/integrations';
 
 const { title, href = null, action = 'Open', meta, external = true, app = null } = Astro.props;
 // Only named on a card that actually leaves the site. Telling somebody they

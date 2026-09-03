@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
 import MediaText from '../components/MediaText.astro';
 import Facilities from '../components/Facilities.astro';
 import { Image } from 'astro:assets';
@@ -7,7 +8,7 @@ import headPhoto from '../assets/images/head-of-school.jpg';
 import storyPhoto from '../assets/images/culturalattireday.jpg';
 ---
 <Layout
-  title="About - Mt Cedar British International School"
+  title={`About - ${site.name}`}
   description="Meet Mt Cedar British International School: our philosophy, our values, and the story behind a new school in the Obaretin community of Benin City, combining British EYFS and Montessori with the Nigerian Curriculum enriched with Cambridge."
   active="about"
 >

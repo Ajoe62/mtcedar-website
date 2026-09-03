@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { portalHref, lessonsLive, examLive } from '../config/portal.js';
+import { site } from '../config/site';
+import { portalHref, portalLive } from '../config/integrations';
 
 /**
  * The chooser. Three doors, and nothing else on the page.
@@ -22,11 +23,11 @@ import { portalHref, lessonsLive, examLive } from '../config/portal.js';
 // Both student destinations run through their own live flag. If the two ever
 // go dark together the students door has nothing behind it, and saying so here
 // is better than sending a parent to a page of "opening soon" cards.
-const studentsReady = examLive || lessonsLive;
+const studentsReady = portalLive;
 const adminHref = portalHref('admin');
 ---
 <Layout
-  title="Portal - Mt Cedar British International School"
+  title={`Portal - ${site.name}`}
   description="The Mt Cedar portal. Choose your door: students for lessons and assessments, staff for marking and lesson authoring, administrators for the school dashboard."
   active="portal"
 >

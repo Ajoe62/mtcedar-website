@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { site } from '../../config/site';
 import PortalCard from '../../components/PortalCard.astro';
-import { portalHref, lessonsLive, examLive } from '../../config/portal.js';
+import { portalHref, portalLive } from '../../config/integrations';
 
 /**
  * The student door, reached from the chooser at /portal.
@@ -16,7 +17,7 @@ const exam = portalHref('exam');
 const results = portalHref('results');
 ---
 <Layout
-  title="Student Portal - Mt Cedar British International School"
+  title={`Student Portal - ${site.name}`}
   description="The Mt Cedar student portal. Open your lessons on JDSmartLearn, sit an assessment on ResultPeak, and check a result. One username and access code opens both."
   active="portal"
 >
@@ -29,7 +30,7 @@ const results = portalHref('results');
   </div>
 </section>
 
-{!examLive && !lessonsLive && (
+{!portalLive && (
   <section class="slim notice-band">
     <div class="wrap">
       <p><strong>The student portal is being prepared.</strong> Your class teacher will tell you the day it opens. Nothing needs setting up at home before then.</p>

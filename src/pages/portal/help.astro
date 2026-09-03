@@ -1,9 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { resultLookupLive } from '../../config/portal.js';
+import { site, tel, phoneLabel, mailto } from '../../config/site';
+import { routeLive } from '../../config/integrations';
+
+const resultLookupLive = routeLive('results');
 ---
 <Layout
-  title="Sign-in Guide - Mt Cedar Portal"
+  title={`Sign-in Guide - ${site.shortName} Portal`}
   description="How to sign in to the Mt Cedar portal: what a username and access code look like, what to do if a code is lost, how lessons work offline, and how term results are issued."
   active="portal"
 >
@@ -60,8 +63,8 @@ import { resultLookupLive } from '../../config/portal.js';
     <aside class="cform" style="align-self:start">
       <h3 style="font-family:var(--font-display);font-size:1.4rem;margin:0 0 .3rem">Still stuck?</h3>
       <p style="color:var(--muted);margin:0 0 1.2rem;font-size:.98rem">Reach the school office directly and we will sort it out with you.</p>
-      <a class="btn btn-brand" style="width:100%;margin-bottom:.7rem" href="tel:+2348056733071">Call 0805 673 3071</a>
-      <a class="btn btn-outline" style="width:100%;margin-bottom:1.4rem" href="mailto:mtcedarbritishinternationalsch@gmail.com?subject=Portal%20sign-in%20help">Email the School</a>
+      <a class="btn btn-brand" style="width:100%;margin-bottom:.7rem" href={tel(0)}>Call {phoneLabel(0)}</a>
+      <a class="btn btn-outline" style="width:100%;margin-bottom:1.4rem" href={mailto('Portal sign-in help')}>Email the School</a>
       <p style="color:var(--muted);margin:0;font-size:.9rem">Office hours are the best time to reset a code, because we confirm who you are before issuing a new one.</p>
     </aside>
   </div>

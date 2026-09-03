@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { site } from '../../config/site';
 import PortalCard from '../../components/PortalCard.astro';
-import { portalHref } from '../../config/portal.js';
+import { portalHref } from '../../config/integrations';
 
 /**
  * The staff door, reached from the chooser at /portal.
@@ -16,7 +17,7 @@ const staffLearn = portalHref('staffLearn');
 const staffResultPeak = portalHref('staffResultPeak');
 ---
 <Layout
-  title="Staff Portal - Mt Cedar British International School"
+  title={`Staff Portal - ${site.name}`}
   description="The Mt Cedar staff portal. Author lessons and assignments in JDSmartLearn, and enter marks, take attendance and build result sheets in ResultPeak. One school email address signs in to both."
   active="portal"
 >

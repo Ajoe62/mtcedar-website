@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { site, mailto } from '../config/site';
 ---
 <Layout
-  title="For Schools - The Technology Behind Mt Cedar"
+  title={`For Schools - The Technology Behind ${site.shortName}`}
   description="ResultPeak AI and JDSmartLearn: the assessment platform and lesson system built for Nigerian schools and used every day at Mt Cedar British International School. Request a walkthrough."
   active=""
 >
@@ -72,7 +73,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="cform" style="align-self:start">
         <h3 style="font-family:var(--font-display);font-size:1.4rem;margin:0 0 .3rem">See it working</h3>
         <p style="color:var(--muted);margin:0 0 1.2rem;font-size:.98rem">A walkthrough with a school administrator takes about half an hour, and we will use your subjects and your grading scale rather than a demo dataset.</p>
-        <a class="btn btn-brand" style="width:100%;margin-bottom:.7rem" href="mailto:mtcedarbritishinternationalsch@gmail.com?subject=ResultPeak%20%2F%20JDSmartLearn%20enquiry%20%28from%20For%20Schools%20page%29">Request a Walkthrough</a>
+        <a class="btn btn-brand" style="width:100%;margin-bottom:.7rem" href={mailto('ResultPeak / JDSmartLearn enquiry (from For Schools page)')}>Request a Walkthrough</a>
         <p style="color:var(--muted);margin:1rem 0 0;font-size:.88rem">This enquiry is about the software. For admissions to Mt Cedar, please use the <a href="/admissions" style="color:var(--brand);font-weight:700">admissions page</a> instead.</p>
       </div>
     </div>
@@ -85,7 +86,7 @@ import Layout from '../layouts/Layout.astro';
     <h2>Tested in a real school, every term.</h2>
     <p>Both systems are used by Mt Cedar's own teachers and students. When something does not work in a classroom, we find out the same week.</p>
     <div class="cta">
-      <a class="btn btn-gold btn-lg" href="mailto:mtcedarbritishinternationalsch@gmail.com?subject=ResultPeak%20%2F%20JDSmartLearn%20enquiry">Start a Conversation <span class="arr">→</span></a>
+      <a class="btn btn-gold btn-lg" href={mailto('ResultPeak / JDSmartLearn enquiry')}>Start a Conversation <span class="arr">→</span></a>
       <a class="btn btn-ghost btn-lg" href="/portal">See the Portal</a>
     </div>
   </div>

@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { site, tel, phoneLabel, mailto } from '../config/site';
 import Facilities from '../components/Facilities.astro';
 import Directions from '../components/Directions.astro';
-import { portalHref } from '../config/portal.js';
+import { portalHref } from '../config/integrations';
 
 // The entrance assessment is sat on ResultPeak at the school's own address, so
 // the school is already selected. Null out of season, and the whole callout
@@ -10,7 +11,7 @@ import { portalHref } from '../config/portal.js';
 const entranceHref = portalHref('entrance');
 ---
 <Layout
-  title="Admissions - Mt Cedar British International School"
+  title={`Admissions - ${site.name}`}
   description="Admissions for the 2026/2027 session are open at Mt Cedar British International School, Benin City, from Nursery through Primary to Senior Secondary. See how to apply."
   active="admissions"
 >
@@ -22,7 +23,7 @@ const entranceHref = portalHref('entrance');
     <p>Applications are open from Nursery through Primary to Senior Secondary. Arrange a visit, meet our teachers, and feel the Mt Cedar difference in person.</p>
     <div class="cta" style="margin-top:1.8rem">
       <a class="btn btn-gold btn-lg" href="/contact">Start an Enquiry <span class="arr">→</span></a>
-      <a class="btn btn-ghost btn-lg" href="tel:+2349043729659">Call 0904 372 9659</a>
+      <a class="btn btn-ghost btn-lg" href={tel(1)}>Call {phoneLabel(1)}</a>
     </div>
   </div>
 </section>
@@ -81,8 +82,8 @@ const entranceHref = portalHref('entrance');
     <div class="cform" style="align-self:start">
       <h3 style="font-family:var(--font-display);font-size:1.4rem;margin:0 0 .3rem">Ready to begin?</h3>
       <p style="color:var(--muted);margin:0 0 1.2rem;font-size:.98rem">Reach us directly and we’ll get straight back to you.</p>
-      <a class="btn btn-brand" style="width:100%;margin-bottom:.7rem" href="mailto:mtcedarbritishinternationalsch@gmail.com?subject=Admissions%20Enquiry">Email an Enquiry</a>
-      <a class="btn btn-outline" style="width:100%" href="tel:+2348056733071">Call 0805 673 3071</a>
+      <a class="btn btn-brand" style="width:100%;margin-bottom:.7rem" href={mailto('Admissions Enquiry')}>Email an Enquiry</a>
+      <a class="btn btn-outline" style="width:100%" href={tel(0)}>Call {phoneLabel(0)}</a>
     </div>
   </div>
 </section>

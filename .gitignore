@@ -1,5 +1,7 @@
 # build output
 dist/
+# Baseline builds made while verifying a refactor renders identically.
+dist-*/
 
 # generated types
 .astro/
