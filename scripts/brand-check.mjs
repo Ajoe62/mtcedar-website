@@ -38,6 +38,7 @@ if (missing.length) {
 
 let failed = 0;
 console.log('\n  Contrast audit of src/system/styles/generated/brand.css\n');
+tokens.white = { r: 255, g: 255, b: 255 };
 for (const [label, fg, bg, target] of contrastPairs(tokens)) {
   const ratio = contrast(fg, bg);
   const ok = ratio >= target;

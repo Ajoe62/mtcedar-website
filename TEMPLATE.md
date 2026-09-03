@@ -35,7 +35,7 @@ $EDITOR src/content/{values,facilities,programmes,news,directions}/
 # 6. Composition. Which blocks, in what order, on which grounds.
 $EDITOR src/config/pages.ts
 
-npm run check                    # contrast + system guard + build
+npm run check                    # contrast + system guard + build + links
 npm run dev
 ```
 
@@ -243,4 +243,38 @@ alpha as 8-bit hex, so an authored `.14` reads back as `.141`; and a value that
 moves from a restatement to an inheritance shows up as a deletion even though
 nothing changed.
 
-`npm run check` runs the contrast gate, the system guard and the build.
+`npm run check` runs the contrast gate, the system guard, the build and the
+link check.
+
+---
+
+## What building the second site actually found
+
+The template was proved by building a second school from it end to end, with a
+navy-and-amber crest that has nothing in common with Mt Cedar's. It surfaced
+four things, all now fixed in the template:
+
+1. **`new-site` fell over on the first field it met** whose value the formatter
+   had wrapped onto the next line. It had only ever been read, never run.
+
+2. **`brand:init` darkened the wrong token.** The contrast audit matched colours
+   by object identity to work out what to nudge, and `--accent-text` starts life
+   as a copy of `--accent`, so fixing the eyebrow darkened every gold fill on
+   the site. Pairs are keyed by token name now; names cannot collide the way
+   values can.
+
+3. **A deliberate third colour was being filtered out as noise.** The crest's
+   teal stripe was 0.9% of the image against a 1% floor. The floor is 0.4%.
+
+4. **Two dead links, buried in prose.** With `portal: false` the site built
+   clean, and two sentences still linked to `/portal`: one on the academics page
+   and one in the privacy policy. Feature flags remove generated links; they
+   cannot remove a link somebody wrote inside a paragraph. `npm run check:links`
+   now fails the build on any internal href that does not resolve, and
+   `new-site` reports every file still naming the previous school.
+
+**What it confirmed:** zero files under `src/system/` needed editing, no Mt Cedar
+colour survived anywhere in the second site's CSS, and the spec-driven homepage
+converted completely with no markup touched. The six hand-written prose pages
+did not, which is the honest cost of leaving them as markup and the clearest
+argument for converting more of them to specs later.

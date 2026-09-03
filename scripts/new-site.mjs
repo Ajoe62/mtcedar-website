@@ -46,10 +46,23 @@ const [phoneDisplay, phoneDial] = (flag('phone', '0800 000 0000:+2348000000000')
 const sitePath = 'src/config/site.ts';
 let site = await fs.readFile(sitePath, 'utf8');
 
+// Remember who this copy used to belong to, so the report at the end can say
+// exactly where their name still appears. Building a second site from this
+// template left eight mentions of the previous school scattered through prose
+// that new-site cannot write, and the only reason they were found was that
+// somebody went looking.
+const previous = {
+  name: (site.match(/^  name: '([^']*)'/m) || [, ''])[1],
+  short: (site.match(/^  shortName: '([^']*)'/m) || [, ''])[1],
+};
+
 const set = (key, value, indent = '  ') => {
-  const re = new RegExp(`^(${indent}${key}: )'[^']*'`, 'm');
+  // The value may sit on the line below its key, because the formatter wraps
+  // the long ones. The first version of this matched same-line values only and
+  // fell over on defaultDescription the first time it was ever run for real.
+  const re = new RegExp(`^${indent}${key}:[\\s]*'(?:[^'\\\\]|\\\\.)*'`, 'm');
   if (!re.test(site)) throw new Error(`could not find ${key} in ${sitePath}`);
-  site = site.replace(re, `$1'${value.replace(/'/g, "\\'")}'`);
+  site = site.replace(re, `${indent}${key}: '${value.replace(/'/g, "\\'")}'`);
 };
 
 set('name', name);
@@ -99,6 +112,41 @@ for (const c of collections) {
   );
 }
 
+/* ---- what is left of the previous school -------------------------------- */
+
+/**
+ * The prose this script cannot write, and therefore cannot check for you.
+ *
+ * Identity and content are handled above. What is left is sentences: a
+ * paragraph about a curriculum, an image alt, a meta description. Those are
+ * one school writing about itself, and inheriting them silently is how a
+ * template ships a site making claims about the wrong school.
+ */
+async function walk(dir) {
+  const out = [];
+  for (const e of await fs.readdir(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) out.push(...(await walk(p)));
+    else if (/\.(astro|ts|md)$/.test(e.name)) out.push(p);
+  }
+  return out;
+}
+
+const stale = [];
+for (const dir of ['src/pages', 'src/config']) {
+  for (const file of await walk(dir)) {
+    const text = await fs.readFile(file, 'utf8');
+    let hits = 0;
+    for (const term of [previous.name, previous.short].filter(Boolean)) {
+      // Counted by splitting rather than by regex: a school name can contain
+      // any character, and escaping it correctly is a worse bug than counting
+      // it plainly.
+      hits += text.split(term).length - 1;
+    }
+    if (hits) stale.push({ file, hits });
+  }
+}
+
 /* ---- role ---------------------------------------------------------------- */
 
 const pkg = JSON.parse(await fs.readFile('package.json', 'utf8'));
@@ -113,7 +161,14 @@ console.log(`
     content      src/content/*             ${removed} files from the previous school removed
     role         templateRole: "client"    src/system is now guarded
 
-  Next, in order:
+${stale.length ? `  Still mentioning ${previous.name}, in prose this script cannot write:
+
+${stale.map((s) => `    ${String(s.hits).padStart(3)}  ${s.file}`).join('\n')}
+
+  Every one of those is a sentence somebody has to rewrite. A site that ships
+  with them is a site claiming another school's curriculum.
+
+` : ''}  Next, in order:
 
     1. cp <logo> brand/logo.png
        npm run brand:init -- --logo brand/logo.png --preset <preset>

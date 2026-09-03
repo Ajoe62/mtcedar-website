@@ -37,10 +37,17 @@ try {
     .map((s) => s.trim())
     .filter(Boolean);
 } catch {
-  console.error(
-    `\n  Could not diff against ${base}. Set SYSTEM_GUARD_BASE to a ref that exists.\n`,
+  // A freshly copied site has no repository and no upstream yet, and the first
+  // thing anybody does with it is run the build. Failing here would block every
+  // new site on day one, to guard against an edit nobody has yet had the
+  // chance to make. Warn and pass. CI passes a real base ref and never reaches
+  // this branch, so the guard still has teeth exactly where it needs them.
+  console.log(
+    `\n  Skipping the system guard: cannot diff against ${base}.` +
+      `\n  Expected in a fresh copy. It runs for real in CI, and locally once` +
+      `\n  the repo has an upstream.\n`,
   );
-  process.exit(1);
+  process.exit(0);
 }
 
 const offending = changed.filter((f) => f.startsWith('src/system/') && !f.startsWith('src/system/styles/generated/'));

@@ -43,3 +43,10 @@ jobs:
       # an unknown icon name fails here rather than at launch.
       - name: Build
         run: npm run build
+
+      # A feature flag removes a page's nav entry, its footer link and its
+      # route. It cannot remove a link somebody wrote inside a sentence, and
+      # that is the failure this template is most likely to ship: not a broken
+      # build, a broken paragraph.
+      - name: Internal links
+        run: npm run check:links

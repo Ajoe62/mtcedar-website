@@ -127,7 +127,7 @@ const hueGap = (a, b) => {
 export function assignRoles(colors, overrides = {}) {
   const notes = [];
 
-  const candidates = colors.filter((c) => c.L > 0.12 && c.L < 0.95 && c.share > 0.01);
+  const candidates = colors.filter((c) => c.L > 0.12 && c.L < 0.95 && c.share > 0.004);
   const pool = candidates.length >= 2 ? candidates : colors;
   if (candidates.length < 2) {
     notes.push('Logo is mostly paper and linework; fell back to the raw clusters.');
@@ -176,7 +176,7 @@ export function assignRoles(colors, overrides = {}) {
     /* The accent is chosen to sit well as a FILL. At 11px on a pale ground it
        is usually nowhere near legible, so eyebrows and tags get their own
        darkened relative. The gate below is what sets how far it moves. */
-    'accent-text': accent,
+    'accent-text': { ...accent },
 
     feature: oklchToRgb({ L: clamp(featureSrc.L, 0.3, 0.45), C: featureSrc.C, h: featureSrc.h }),
     'feature-900': oklchToRgb({ L: clamp(featureSrc.L, 0.3, 0.45) * 0.78, C: featureSrc.C, h: featureSrc.h }),
@@ -236,42 +236,55 @@ export function buildRamps(roles) {
  * whole script exists to prevent, so nothing here fails quietly.
  */
 export function contrastPairs(t) {
-  const white = { r: 255, g: 255, b: 255 };
-  return [
-    ['body text on the page', t.ink, t.surface, 4.5],
-    ['body text on the alternate band', t.ink, t['surface-2'], 4.5],
-    ['secondary text on the page', t.muted, t.surface, 4.5],
-    ['body text on the brand colour', t['on-brand-2'], t.brand, 4.5],
-    ['card text on the brand colour', t['on-brand-4'], t.brand, 4.5],
-    ['footer text', t['on-brand-4'], t['brand-900'], 4.5],
-    ['footer fine print', t['on-brand-6'], t['brand-900'], 4.5],
-    ['button label on the accent', t['on-accent'], t.accent, 4.5],
-    ['eyebrow on the page', t['accent-text'], t.surface, 4.5],
-    ['eyebrow on the brand colour', t['accent-300'], t.brand, 4.5],
-    ['body text on the feature band', t['on-feature-2'], t.feature, 4.5],
-    ['heading on the feature band', white, t.feature, 3],
-  ];
+  return CONTRAST_PAIRS.map(([label, fg, bg, target]) => [label, t[fg], t[bg], target, fg, bg]);
 }
+
+/**
+ * The twelve pairs a school site actually puts in front of a reader, named by
+ * TOKEN rather than by colour.
+ *
+ * They used to be given as colour values, and the audit worked out which token
+ * to nudge by matching object identity. That silently moved the wrong token
+ * the moment two roles started out equal: --accent-text begins as a copy of
+ * --accent, so darkening the eyebrow darkened every gold fill on the site
+ * instead. Names cannot collide the way values can.
+ */
+const CONTRAST_PAIRS = [
+  ['body text on the page', 'ink', 'surface', 4.5],
+  ['body text on the alternate band', 'ink', 'surface-2', 4.5],
+  ['secondary text on the page', 'muted', 'surface', 4.5],
+  ['body text on the brand colour', 'on-brand-2', 'brand', 4.5],
+  ['card text on the brand colour', 'on-brand-4', 'brand', 4.5],
+  ['footer text', 'on-brand-4', 'brand-900', 4.5],
+  ['footer fine print', 'on-brand-6', 'brand-900', 4.5],
+  ['button label on the accent', 'on-accent', 'accent', 4.5],
+  ['eyebrow on the page', 'accent-text', 'surface', 4.5],
+  ['eyebrow on the brand colour', 'accent-300', 'brand', 4.5],
+  ['body text on the feature band', 'on-feature-2', 'feature', 4.5],
+  ['heading on the feature band', 'white', 'feature', 3],
+];
 
 export function auditAndFix(tokens) {
   const report = [];
-  const fixed = { ...tokens };
+  const fixed = { ...tokens, white: { r: 255, g: 255, b: 255 } };
 
-  for (const [label, fg, bg, target] of contrastPairs(fixed)) {
+  for (const [label, fgKey, bgKey, target] of CONTRAST_PAIRS) {
+    const fg = fixed[fgKey];
+    const bg = fixed[bgKey];
     const before = contrast(fg, bg);
-    const key = Object.keys(fixed).find((k) => fixed[k] === fg);
     const { color, moved, failed } = ensureContrast(fg, bg, target);
-    if (key && moved) fixed[key] = color;
+    if (moved) fixed[fgKey] = color;
     report.push({
       label,
       target,
       before: Number(before.toFixed(2)),
       after: Number(contrast(color, bg).toFixed(2)),
-      nudged: moved !== 0 ? `${key} lightness ${moved > 0 ? '+' : ''}${(moved * 100).toFixed(0)}%` : null,
+      nudged: moved !== 0 ? `--${fgKey} lightness ${moved > 0 ? '+' : ''}${(moved * 100).toFixed(0)}%` : null,
       failed: Boolean(failed),
       fg: hex(fg),
       bg: hex(bg),
     });
   }
+  delete fixed.white;
   return { tokens: fixed, report };
 }
