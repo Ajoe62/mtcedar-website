@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { site } from '../config/site';
+import { site, phoneLabel } from '../config/site';
 ---
 <Layout
   title={`Privacy - ${site.name}`}
@@ -54,7 +54,7 @@ import { site } from '../config/site';
       <p>Academic records (results and result sheets) are kept as part of the student's school record, as any school keeps them. Lesson-viewing records are operational and are not kept indefinitely. When a student leaves, their sign-in is deactivated; the academic record remains.</p>
 
       <h2>Your requests</h2>
-      <p>You may ask what we hold about your child, ask us to correct it, ask for a copy, or raise a concern about how it is being used. Contact the school office and we will deal with it directly, at <a href="mailto:mtcedarbritishinternationalsch@gmail.com">mtcedarbritishinternationalsch@gmail.com</a> or 0805 673 3071.</p>
+      <p>You may ask what we hold about your child, ask us to correct it, ask for a copy, or raise a concern about how it is being used. Contact the school office and we will deal with it directly, at <a href={`mailto:${site.email}`}>{site.email}</a> or {phoneLabel(0)}.</p>
       <p>This page is written to be understood rather than to be exhaustive. If you need something more formal for a specific purpose, ask us and we will provide it.</p>
     </div>
   </div>
