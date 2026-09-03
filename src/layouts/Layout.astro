@@ -1,6 +1,21 @@
 ---
-import '../styles/global.css';
-import '../styles/enhance.css';
+// The stylesheet chain, and it is an order not a set. Each layer may only
+// read from the one above it:
+//   generated/brand.css  what this school's colours and shapes ARE
+//   tokens.css           what they MEAN (--brand, --shadow-card, --on-accent)
+//   reset.css            element defaults
+//   primitives.css       buttons, cards, measure, section rhythm
+//   blocks.css           one stanza per section pattern
+//
+// A new school replaces exactly one of these, the first. Everything below it
+// is system code, identical across every site built from this template, and
+// the reason it can stay identical is that no layer below tokens.css is
+// allowed to contain a colour literal carrying brand identity.
+import '../system/styles/generated/brand.css';
+import '../system/styles/tokens.css';
+import '../system/styles/reset.css';
+import '../system/styles/primitives.css';
+import '../system/styles/blocks.css';
 // EVERY portal entry point on this site is an internal one now.
 //
 // The utility bar used to link straight out to ResultPeak, so the first screen

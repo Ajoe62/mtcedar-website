@@ -93,14 +93,14 @@ const adminHref = portalHref('admin');
       </div>
     </div>
     <div class="cta" style="margin-top:2.2rem">
-      <a class="btn btn-cedar" href="/portal/help">Read the full sign-in guide <span class="arr">&rarr;</span></a>
+      <a class="btn btn-brand" href="/portal/help">Read the full sign-in guide <span class="arr">&rarr;</span></a>
     </div>
   </div>
 </section>
 
 <section class="band">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--gold-bright)">Need a hand?</p>
+    <p class="eyebrow" style="color:var(--accent-300)">Need a hand?</p>
     <h2>Lost a code? Ask the school.</h2>
     <p>Access codes are issued and reset by the school office. For your child's safety we cannot send one over the phone without confirming who you are. Come in, or call and we will arrange it.</p>
     <div class="cta">
@@ -124,8 +124,8 @@ const adminHref = portalHref('admin');
     height: 76px;
     border-radius: 50%;
     margin: 0 auto 1.1rem;
-    border: 2px solid rgba(224, 182, 74, 0.5);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--line-accent-crest);
+    box-shadow: var(--shadow-crest);
   }
 
   .doors-sec {
@@ -139,29 +139,29 @@ const adminHref = portalHref('admin');
   .door {
     display: flex;
     flex-direction: column;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 16px;
+    background: var(--card);
+    border: var(--border-weight) solid var(--line);
+    border-radius: var(--radius-lg);
     padding: 2.1rem 1.7rem 1.9rem;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   }
   .door:hover {
     transform: translateY(-4px);
-    border-color: rgba(195, 150, 48, 0.55);
-    box-shadow: 0 18px 40px rgba(18, 60, 40, 0.14);
+    border-color: var(--line-accent-strong);
+    box-shadow: var(--shadow-card-strong);
   }
   .door-ic {
     width: 58px;
     height: 58px;
-    border-radius: 14px;
+    border-radius: var(--radius-card);
     display: grid;
     place-items: center;
-    color: #fbf6ea;
-    background: linear-gradient(150deg, var(--cedar), var(--cedar-deep));
+    color: var(--on-brand-strong);
+    background: var(--grad-brand-tile);
     margin-bottom: 1.2rem;
   }
   .door--admin .door-ic {
-    background: linear-gradient(150deg, var(--oxblood), #5c1620);
+    background: var(--grad-feature-tile);
   }
   .door h2 {
     font-size: 1.5rem;
@@ -179,10 +179,10 @@ const adminHref = portalHref('admin');
     padding-top: 1.4rem;
     font-weight: 800;
     font-size: 0.92rem;
-    color: var(--cedar);
+    color: var(--brand);
   }
   .door--admin .door-go {
-    color: var(--oxblood);
+    color: var(--feature);
   }
   .door .arr {
     transition: transform 0.2s ease;
@@ -203,7 +203,7 @@ const adminHref = portalHref('admin');
   }
 
   .reassure {
-    background: var(--ivory-2);
+    background: var(--surface-2);
   }
   .reassure-grid {
     display: grid;

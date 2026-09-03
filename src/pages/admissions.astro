@@ -59,7 +59,7 @@ const entranceHref = portalHref('entrance');
           <p class="entrance-note">Nothing is needed from us before you begin. We send an exam PIN separately, once a sitting is scheduled.</p>
         </div>
         <div class="entrance-act">
-          <a class="btn btn-cedar" href={entranceHref} rel="noopener">Begin an Application <span class="arr">→</span></a>
+          <a class="btn btn-brand" href={entranceHref} rel="noopener">Begin an Application <span class="arr">→</span></a>
           <a class="btn btn-outline" href="/contact">Ask a Question</a>
         </div>
       </div>
@@ -67,7 +67,7 @@ const entranceHref = portalHref('entrance');
   </section>
 )}
 
-<section style="background:var(--ivory-2)">
+<section style="background:var(--surface-2)">
   <div class="wrap two-col">
     <div class="lead-copy">
       <p class="eyebrow">Good to Know</p>
@@ -79,9 +79,9 @@ const entranceHref = portalHref('entrance');
       <p><strong>What to bring to a visit:</strong> just yourselves. We’ll walk you through everything else in person.</p>
     </div>
     <div class="cform" style="align-self:start">
-      <h3 style="font-family:var(--display);font-size:1.4rem;margin:0 0 .3rem">Ready to begin?</h3>
+      <h3 style="font-family:var(--font-display);font-size:1.4rem;margin:0 0 .3rem">Ready to begin?</h3>
       <p style="color:var(--muted);margin:0 0 1.2rem;font-size:.98rem">Reach us directly and we’ll get straight back to you.</p>
-      <a class="btn btn-cedar" style="width:100%;margin-bottom:.7rem" href="mailto:mtcedarbritishinternationalsch@gmail.com?subject=Admissions%20Enquiry">Email an Enquiry</a>
+      <a class="btn btn-brand" style="width:100%;margin-bottom:.7rem" href="mailto:mtcedarbritishinternationalsch@gmail.com?subject=Admissions%20Enquiry">Email an Enquiry</a>
       <a class="btn btn-outline" style="width:100%" href="tel:+2348056733071">Call 0805 673 3071</a>
     </div>
   </div>
@@ -93,14 +93,14 @@ const entranceHref = portalHref('entrance');
 />
 
 <Directions
-  background="var(--ivory-2)"
+  background="var(--surface-2)"
   title="Finding us on the day."
   intro="Before you set out, here are the two landmark routes to the school. Save them for your visit."
 />
 
 <section class="band">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--gold-bright)">We’d love to meet you</p>
+    <p class="eyebrow" style="color:var(--accent-300)">We’d love to meet you</p>
     <h2>Book a visit to Mt Cedar.</h2>
     <p>See the classrooms, meet the teachers, and picture your child here. We’ll make time for you.</p>
     <div class="cta">
@@ -119,12 +119,12 @@ const entranceHref = portalHref('entrance');
     grid-template-columns: 1.35fr 0.65fr;
     gap: 2.4rem;
     align-items: center;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--gold);
-    border-radius: 16px;
+    background: var(--card);
+    border: var(--border-weight) solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-lg);
     padding: 2.2rem 2rem;
-    box-shadow: 0 18px 44px rgba(18, 60, 40, 0.08);
+    box-shadow: var(--shadow-form);
   }
   .entrance h2 {
     font-size: clamp(1.5rem, 2.6vw, 2rem);
@@ -138,7 +138,7 @@ const entranceHref = portalHref('entrance');
   }
   .entrance-note {
     font-size: 0.95rem !important;
-    color: var(--cedar) !important;
+    color: var(--brand) !important;
     font-weight: 600;
     margin: 0 !important;
   }
