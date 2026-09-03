@@ -1,7 +1,22 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { site, tel, phoneLabel, mailto } from '../../config/site';
-import { routeLive } from '../../config/integrations';
+import { features } from '../../../config/features';
+
+// GATED ROUTE. A rest parameter that generates exactly one path, or none.
+//
+// This file used to be src/pages/portal/help.astro. A page sitting in src/pages/ is routed
+// whether or not the school has the feature, so turning `portal` off removed
+// every link to this page and left the page itself reachable by anyone with
+// the URL. A school that does not run a portal would have shipped one.
+//
+// Returning [] from getStaticPaths emits nothing. Returning a single undefined
+// path emits the parent route, which is the same URL this page always had.
+export function getStaticPaths() {
+  return features.portal ? [{ params: { path: undefined } }] : [];
+}
+
+import Layout from '../../../layouts/Layout.astro';
+import { site, tel, phoneLabel, mailto } from '../../../config/site';
+import { routeLive } from '../../../config/integrations';
 
 const resultLookupLive = routeLive('results');
 ---

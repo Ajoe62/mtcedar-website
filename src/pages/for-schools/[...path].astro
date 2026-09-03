@@ -1,7 +1,22 @@
 ---
-import Icon from '../system/components/Icon.astro';
-import Layout from '../layouts/Layout.astro';
-import { site, mailto } from '../config/site';
+import { features } from '../../config/features';
+
+// GATED ROUTE. A rest parameter that generates exactly one path, or none.
+//
+// This file used to be src/pages/for-schools.astro. A page sitting in src/pages/ is routed
+// whether or not the school has the feature, so turning `forSchools` off removed
+// every link to this page and left the page itself reachable by anyone with
+// the URL. A school that does not run the For Schools pitch would have shipped one.
+//
+// Returning [] from getStaticPaths emits nothing. Returning a single undefined
+// path emits the parent route, which is the same URL this page always had.
+export function getStaticPaths() {
+  return features.forSchools ? [{ params: { path: undefined } }] : [];
+}
+
+import Icon from '../../system/components/Icon.astro';
+import Layout from '../../layouts/Layout.astro';
+import { site, mailto } from '../../config/site';
 ---
 <Layout
   title={`For Schools - The Technology Behind ${site.shortName}`}

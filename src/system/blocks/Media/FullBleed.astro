@@ -3,15 +3,16 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
+  id?: string;
   image: ImageMetadata;
   alt: string;
   eyebrow?: string;
   title: string;
 }
 
-const { image, alt, eyebrow, title } = Astro.props;
+const { image, alt, eyebrow, title, id } = Astro.props;
 ---
-<section class="fullbleed">
+<section id={id} class="fullbleed">
   <div class="fb-media" aria-hidden="true">
     <Image src={image} alt={alt} widths={[768, 1280, 1672]} sizes="100vw" format="webp" quality={72} loading="lazy" />
   </div>

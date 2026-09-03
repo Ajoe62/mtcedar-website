@@ -1,19 +1,22 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Icon from '../system/components/Icon.astro';
+import Icon from '../../components/Icon.astro';
+import type { Surface } from '../types';
 
 interface Props {
   eyebrow?: string;
   title?: string;
   intro?: string;
-  background?: string;
+  surface?: Surface;
+  id?: string;
 }
 
 const {
   eyebrow = 'Finding Us',
   title = 'How to find the school.',
   intro = 'We are in the Obaretin community, close to Rubber Research Junction. Street names are little help out here, so here are the two routes our families actually use.',
-  background,
+  surface = 'base',
+  id = 'directions',
 } = Astro.props;
 
 // The one collection whose body is Markdown rather than a frontmatter line.
@@ -26,7 +29,7 @@ const rendered = await Promise.all(
   routes.map(async (route) => ({ ...route, Body: (await render(route)).Content })),
 );
 ---
-<section id="directions" style={background ? `background:${background}` : undefined}>
+<section id={id} class={surface !== 'base' ? `surface-${surface}` : undefined}>
   <div class="wrap">
     <div class="sec-head"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2><p>{intro}</p></div>
     <div class="feat-grid two">

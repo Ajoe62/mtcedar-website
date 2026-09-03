@@ -2,8 +2,8 @@
 import Icon from '../system/components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import { site } from '../config/site';
-import MediaText from '../components/MediaText.astro';
-import Facilities from '../components/Facilities.astro';
+import MediaText from '../system/blocks/Media/Text.astro';
+import Facilities from '../system/blocks/Feature/Grid.astro';
 import { portalHref } from '../config/integrations';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
@@ -66,7 +66,7 @@ const programmes = (await getCollection('programmes')).sort((a, b) => a.data.ord
   eyebrow="Beyond the Textbook"
   title="A curriculum that goes further."
   reverse={true}
-  background="var(--surface-2)"
+  surface="alt"
 >
   <p>Reading, research and independent thinking sit at the heart of a Mt Cedar education. Our library and learning spaces give pupils room to explore ideas, follow their questions, and build a genuine love of learning.</p>
   <p>Specialist lessons in the arts, science and sport round out a broad, balanced education for every stage.</p>
@@ -97,7 +97,7 @@ const programmes = (await getCollection('programmes')).sort((a, b) => a.data.ord
 </section>
 
 <Facilities
-  background="var(--surface-2)"
+  surface="alt"
   title="Learning you can put your hands on."
   intro="Well equipped Biology, Chemistry, Physics and Computer laboratories, a music studio, a stocked library and sports facilities, so lessons are practised, not only taught."
 />

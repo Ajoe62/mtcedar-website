@@ -2,7 +2,7 @@
 import Icon from '../system/components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import { site, tel, mapsUrl, addressLine } from '../config/site';
-import Directions from '../components/Directions.astro';
+import Directions from '../system/blocks/Directions/Routes.astro';
 ---
 <Layout
   title={`Contact - ${site.name}`}
@@ -90,7 +90,7 @@ import Directions from '../components/Directions.astro';
   </div>
 </section>
 
-<Directions background="var(--surface-2)" />
+<Directions surface="alt" />
 
 <section class="band">
   <div class="wrap">

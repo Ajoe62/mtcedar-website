@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site, tel, phoneLabel, mailto } from '../config/site';
-import Facilities from '../components/Facilities.astro';
-import Directions from '../components/Directions.astro';
+import Facilities from '../system/blocks/Feature/Grid.astro';
+import Directions from '../system/blocks/Directions/Routes.astro';
 import { portalHref } from '../config/integrations';
 
 // The entrance assessment is sat on ResultPeak at the school's own address, so
@@ -94,7 +94,7 @@ const entranceHref = portalHref('entrance');
 />
 
 <Directions
-  background="var(--surface-2)"
+  surface="alt"
   title="Finding us on the day."
   intro="Before you set out, here are the two landmark routes to the school. Save them for your visit."
 />

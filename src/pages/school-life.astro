@@ -2,9 +2,9 @@
 import Icon from '../system/components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import { site } from '../config/site';
-import MediaText from '../components/MediaText.astro';
-import FullBleed from '../components/FullBleed.astro';
-import Facilities from '../components/Facilities.astro';
+import MediaText from '../system/blocks/Media/Text.astro';
+import FullBleed from '../system/blocks/Media/FullBleed.astro';
+import Facilities from '../system/blocks/Feature/Grid.astro';
 import { Image } from 'astro:assets';
 import artsPhoto from '../assets/images/artandcraftpupils.jpg';
 import curiosityPhoto from '../assets/images/sciencepupils.jpg';
@@ -68,7 +68,7 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
   alt="Mt Cedar pupils enjoying art and craft"
   eyebrow="Creativity"
   title="Arts, music and making."
-  background="var(--surface-2)"
+  surface="alt"
 >
   <p>From art and craft to music and drama, we give every child room to create, perform and discover a talent. Creative work builds confidence, focus and joy;and it belongs at the heart of a good education.</p>
 </MediaText>
@@ -83,7 +83,7 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
 </FullBleed>
 
 <Facilities
-  background="var(--surface-2)"
+  surface="alt"
   title="The spaces behind a full school day."
   intro="A music studio and instruments, sports facilities and playing grounds, an art and craft studio, and well equipped Biology, Chemistry, Physics and Computer laboratories: every interest has somewhere to grow."
 />
