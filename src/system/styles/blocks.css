@@ -875,7 +875,7 @@ nav.main a.is-active::after {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .ncard h3 {
   font-size: 1.25rem;
@@ -1035,7 +1035,7 @@ nav.main a.is-active::after {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.72rem;
-  color: var(--accent);
+  color: var(--accent-text);
   margin: 0 0 0.3rem;
 }
 .cinfo .row a,

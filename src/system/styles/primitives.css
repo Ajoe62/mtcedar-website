@@ -36,7 +36,9 @@ section.slim {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-size: 0.72rem;
-  color: var(--accent);
+  /* Text, not a fill: 11px uppercase needs the darkened relative. Sections on
+     a dark ground override this back to --accent-300 in surfaces.css. */
+  color: var(--accent-text);
 }
 
 /* ---- Section heading group ---------------------------------------------- */

@@ -26,6 +26,12 @@ import '../system/styles/blocks.css';
 import { site, addressLine, mapsUrl, tel, apexDomain } from '../config/site';
 import { featureEnabled } from '../config/features';
 
+// The font families are declared in generated/brand.css and FETCHED here, and
+// the two used to be written out separately. A preset swap could then load
+// Fraunces and apply Sora. Both now come from brand/fonts.json, which
+// `npm run brand:init` writes alongside the palette.
+import fonts from '../../brand/fonts.json';
+
 // EVERY portal entry point on this site is an internal one.
 //
 // The utility bar used to link straight out to ResultPeak, so the first screen
@@ -66,7 +72,7 @@ const portalEnabled = featureEnabled('portal');
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href={`https://fonts.googleapis.com/css2?${fonts.google}&display=swap`} rel="stylesheet" />
 </head>
 <body>
 

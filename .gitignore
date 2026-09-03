@@ -30,3 +30,8 @@ pnpm-debug.log*
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# brand:init working output. The palette it generates is committed
+# (src/system/styles/generated/brand.css); the preview and audit are not.
+brand/preview.html
+brand/.brand-report.json

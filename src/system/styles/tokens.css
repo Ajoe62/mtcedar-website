@@ -18,6 +18,8 @@
   --brand-900: rgb(var(--brand-900-rgb));
   --accent: rgb(var(--accent-rgb));
   --accent-300: rgb(var(--accent-300-rgb));
+  /** The accent where it has to be read rather than seen. See brand.css. */
+  --accent-text: rgb(var(--accent-text-rgb));
   --feature: rgb(var(--feature-rgb));
   --feature-900: rgb(var(--feature-900-rgb));
   --surface: rgb(var(--surface-rgb));

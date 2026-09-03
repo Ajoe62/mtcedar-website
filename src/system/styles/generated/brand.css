@@ -32,6 +32,17 @@
   /** Accent lifted for dark grounds, and the focus ring. #e0b64a */
   --accent-300-rgb: 224 182 74;
   /**
+   * The accent, darkened until it is legible as TEXT on the page ground. #8c6700
+   *
+   * A brand's accent is chosen to sit well as a fill, and a gold that looks
+   * right filling a button is nowhere near readable at 11px on ivory: the real
+   * accent measures 2.39:1 against --surface, against the 4.5 that small text
+   * needs. Eyebrows, tags and field labels use this; fills, rules, underlines
+   * and anything on a dark ground keep --accent and --accent-300, which are
+   * not text and are not held to a text ratio.
+   */
+  --accent-text-rgb: 140 103 0;
+  /**
    * Accent at roughly 60% lightness, used only underneath the gold button.
    * A shadow tinted with the accent itself reads as a halo rather than a
    * shadow, so the drop colour has to be the darker relative, not the accent.
@@ -92,8 +103,14 @@
   --on-brand-4: #c9c0ac;
   /** Footer prose. */
   --on-brand-5: #a9a290;
-  /** Footer fine print, the quietest legible step. */
-  --on-brand-6: #8f8877;
+  /**
+   * Footer fine print, the quietest legible step.
+   *
+   * Was #8f8877, which measured 4.37:1 on --brand-900. Close enough to look
+   * fine and not close enough to pass, which is the exact case a contrast gate
+   * exists to catch.
+   */
+  --on-brand-6: #928b7a;
 
   /* ---- Text ramp for the feature band ---------------------------------- */
   --on-feature: #fbeee4;
