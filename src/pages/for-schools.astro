@@ -1,4 +1,5 @@
 ---
+import Icon from '../system/components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import { site, mailto } from '../config/site';
 ---
@@ -21,17 +22,17 @@ import { site, mailto } from '../config/site';
     <div class="sec-head"><p class="eyebrow">Why We Built Them</p><h2>Written for the school we actually run.</h2><p>Most school software assumes a computer per child, a reliable connection, and a parent with an email address. That is not the school day here.</p></div>
     <div class="feat-grid">
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+        <div class="ic"><Icon name="mobile" /></div>
         <h3>Built for the phone in the room</h3>
         <p>A mid-range Android on mobile data is the target device, not a laptop. Lessons stay readable once loaded, so a bundle running out does not end the school day.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+        <div class="ic"><Icon name="lock" /></div>
         <h3>No accounts to manage</h3>
         <p>Students sign in with a short username and an access code printed by the school. No email addresses for minors, no password resets, nothing for a parent to set up.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7v6c0 5 3.5 8 9 9 5.5-1 9-4 9-9V7l-9-5Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="ic"><Icon name="shield-check" /></div>
         <h3>A teacher signs off everything</h3>
         <p>AI drafts and AI marking are a first pass, never the last word. No score reaches a result sheet and no lesson reaches a student without a teacher having reviewed it.</p>
       </div>
@@ -44,14 +45,14 @@ import { site, mailto } from '../config/site';
     <div class="sec-head"><p class="eyebrow">The Two Systems</p><h2>Assessment, and lessons.</h2></div>
     <div class="feat-grid two">
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1Z"/><path d="M8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="m9 13 2 2 4-4"/></svg></div>
+        <div class="ic"><Icon name="clipboard-check" /></div>
         <h3>ResultPeak AI</h3>
         <p>An assessment platform that takes each school on its own terms: your subjects, your assessment structure (mid-term test, project, examination) and your grading scale.</p>
         <p>Objective questions are marked on submission. Written answers are marked with AI assistance and queued for tutor review. Scores flow into your term result sheet, ready to print or download.</p>
         <p>Roles run superadmin, school administrator, tutor, student.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 7c-1.8-1.3-4-2-6.5-2H3v13h2.5c2.5 0 4.7.7 6.5 2 1.8-1.3 4-2 6.5-2H21V5h-2.5C16 5 13.8 5.7 12 7Z"/><path d="M12 7v13"/></svg></div>
+        <div class="ic"><Icon name="book-open" /></div>
         <h3>JDSmartLearn</h3>
         <p>A lesson system for primary and secondary. A tutor uploads a lesson; it comes back as a student summary, a set of practice questions, and a marking guide only the tutor can see.</p>
         <p>The tutor edits and publishes. Students read it on their phone, offline once it has loaded.</p>

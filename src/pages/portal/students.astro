@@ -1,4 +1,5 @@
 ---
+import Icon from '../../system/components/Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import { site } from '../../config/site';
 import PortalCard from '../../components/PortalCard.astro';
@@ -50,7 +51,7 @@ const results = portalHref('results');
         action="Go to lessons"
         meta="Mt Cedar already selected. Works offline once opened."
       >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 7c-1.8-1.3-4-2-6.5-2H3v13h2.5c2.5 0 4.7.7 6.5 2 1.8-1.3 4-2 6.5-2H21V5h-2.5C16 5 13.8 5.7 12 7Z"/><path d="M12 7v13"/></svg>
+        <Icon name="book-open" />
         Lesson notes, summaries, practice questions and assignments your teachers publish. Once a lesson has loaded it stays readable with the data switched off, so it works on the way home.
       </PortalCard>
 
@@ -61,7 +62,7 @@ const results = portalHref('results');
         action="Go to assessments"
         meta="Mt Cedar already selected. Needs a steady signal."
       >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6a1 1 0 0 1 1 1v1H8V4a1 1 0 0 1 1-1Z"/><path d="M8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><path d="m9 13 2 2 4-4"/></svg>
+        <Icon name="clipboard-check" />
         Objective questions are marked the moment you submit. Written answers are marked with AI assistance and checked by your teacher before the score counts.
       </PortalCard>
 
@@ -72,7 +73,7 @@ const results = portalHref('results');
         action="Look up a result"
         meta="Released term by term"
       >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+        <Icon name="document" />
         Term result sheets are prepared by the school and released after each term. Until online lookup opens, sheets are issued directly by the school office. See <a href="/portal/help#results">how results are issued</a>.
       </PortalCard>
 

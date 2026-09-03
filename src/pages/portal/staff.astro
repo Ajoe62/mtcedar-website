@@ -1,4 +1,5 @@
 ---
+import Icon from '../../system/components/Icon.astro';
 import Layout from '../../layouts/Layout.astro';
 import { site } from '../../config/site';
 import PortalCard from '../../components/PortalCard.astro';
@@ -42,7 +43,7 @@ const staffResultPeak = portalHref('staffResultPeak');
         action="Tutor sign in"
         meta="Draft, review, publish"
       >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21v-3.5L15.5 6a2.1 2.1 0 0 1 3 3L7 20.5 3.5 21Z"/><path d="M14 7.5 17.5 11"/></svg>
+        <Icon name="pencil" />
         Upload a lesson and get a student summary, practice questions and a marking guide back. Set assignments and see who has turned one in. Nothing reaches students until you have edited and published it.
       </PortalCard>
 
@@ -53,7 +54,7 @@ const staffResultPeak = portalHref('staffResultPeak');
         action="Staff sign in"
         meta="Tutors and school administrators"
       >
-        <svg slot="icon" viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        <Icon name="dashboard" />
         Build exams, review AI-marked written answers before the score counts, take attendance, enter your continuous assessment marks and produce the term result sheets.
       </PortalCard>
 

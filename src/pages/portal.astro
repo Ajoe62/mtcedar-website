@@ -1,4 +1,5 @@
 ---
+import Icon from '../system/components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
 import { site } from '../config/site';
 import { portalHref, portalLive } from '../config/integrations';
@@ -47,7 +48,7 @@ const adminHref = portalHref('admin');
 
       <a class="door" href="/portal/students">
         <span class="door-ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="30" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+          <Icon name="mortarboard" size={30} />
         </span>
         <h2>Students</h2>
         <p>Open your lessons, sit an assessment and check a result. You need the username and access code your class teacher gave you.</p>
@@ -56,7 +57,7 @@ const adminHref = portalHref('admin');
 
       <a class="door" href="/portal/staff">
         <span class="door-ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="30" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21v-3.5L15.5 6a2.1 2.1 0 0 1 3 3L7 20.5 3.5 21Z"/><path d="M14 7.5 17.5 11"/></svg>
+          <Icon name="pencil" size={30} />
         </span>
         <h2>Staff</h2>
         <p>Teachers and tutors. Publish a lesson, mark written answers, take attendance and enter your class marks. You sign in with your school email address, not an access code.</p>
@@ -65,7 +66,7 @@ const adminHref = portalHref('admin');
 
       <a class="door door--admin" href={adminHref ?? '/portal/staff'} rel={adminHref ? 'noopener' : undefined}>
         <span class="door-ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="30" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+          <Icon name="dashboard" size={30} />
         </span>
         <h2>Administrators</h2>
         <p>The school dashboard. Manage the roster and class lists, build the term's exams, release results and issue access codes.</p>

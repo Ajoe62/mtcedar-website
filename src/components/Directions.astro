@@ -1,4 +1,7 @@
 ---
+import { getCollection, render } from 'astro:content';
+import Icon from '../system/components/Icon.astro';
+
 interface Props {
   eyebrow?: string;
   title?: string;
@@ -12,21 +15,28 @@ const {
   intro = 'We are in the Obaretin community, close to Rubber Research Junction. Street names are little help out here, so here are the two routes our families actually use.',
   background,
 } = Astro.props;
+
+// The one collection whose body is Markdown rather than a frontmatter line.
+// These directions carry emphasis on the landmark names, and the emphasis is
+// not decoration: it is what a driver scans for. Frontmatter cannot hold it.
+const routes = (await getCollection('directions')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const rendered = await Promise.all(
+  routes.map(async (route) => ({ ...route, Body: (await render(route)).Content })),
+);
 ---
 <section id="directions" style={background ? `background:${background}` : undefined}>
   <div class="wrap">
     <div class="sec-head"><p class="eyebrow">{eyebrow}</p><h2>{title}</h2><p>{intro}</p></div>
     <div class="feat-grid two">
-      <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
-        <h3>Coming from Presco</h3>
-        <p>Take the second street after <strong>Rubber Research Junction</strong> on the right, beside <strong>SOLID FFLO ASPHALT COMPANY LTD, KM 11</strong>, opposite <strong>GOD&rsquo;S SPRING BEST CARE HOSPITAL</strong>. Turn left, then take the second street on the right. The school is <strong>behind MEA Filling Station</strong>.</p>
-      </div>
-      <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V9l8-5 8 5v11"/><path d="M4 20h16"/><path d="m9 20 0-5h6v5"/></svg></div>
-        <h3>Coming from Ring Road or the Bypass</h3>
-        <p>Stop at <strong>GOD&rsquo;S SPRING BEST CARE HOSPITAL</strong>, just before Rubber Research Junction, opposite <strong>SOLID FFLO ASPHALT COMPANY LTD, KM 11</strong>, and cross the road. Take the street beside the company, turn left, then take the second street on the right. The school is <strong>behind MEA Filling Station</strong>.</p>
-      </div>
+      {rendered.map(({ data, Body }) => (
+        <div class="feat">
+          <div class="ic"><Icon name={data.icon} /></div>
+          <h3>{data.title}</h3>
+          <Body />
+        </div>
+      ))}
     </div>
   </div>
 </section>
