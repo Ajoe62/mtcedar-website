@@ -9,7 +9,9 @@
     "astro": "astro",
     "brand:init": "node scripts/brand-init.mjs",
     "brand:check": "node scripts/brand-check.mjs",
-    "check": "node scripts/brand-check.mjs && astro build"
+    "check": "node scripts/brand-check.mjs && node scripts/check-system.mjs && astro build",
+    "check:system": "node scripts/check-system.mjs",
+    "new-site": "node scripts/new-site.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -18,5 +20,6 @@
   },
   "devDependencies": {
     "sharp": "^0.35.3"
-  }
+  },
+  "templateRole": "template"
 }
