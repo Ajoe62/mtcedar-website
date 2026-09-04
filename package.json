@@ -9,10 +9,11 @@
     "astro": "astro",
     "brand:init": "node scripts/brand-init.mjs",
     "brand:check": "node scripts/brand-check.mjs",
-    "check": "node scripts/brand-check.mjs && node scripts/check-system.mjs && astro build && node scripts/check-links.mjs",
+    "check": "node scripts/brand-check.mjs && node scripts/check-system.mjs && astro build && node scripts/check-links.mjs && node scripts/check-meta.mjs",
     "check:system": "node scripts/check-system.mjs",
     "new-site": "node scripts/new-site.mjs",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "check:meta": "node scripts/check-meta.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

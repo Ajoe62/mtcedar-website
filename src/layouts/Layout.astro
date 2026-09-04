@@ -23,7 +23,7 @@ import '../system/styles/blocks.css';
 // school is written into the chrome below: the name, the crest, the address,
 // the numbers, the nav and the year all come from config, so standing up the
 // next school is an edit to src/config and not a search through src/.
-import { site, addressLine, mapsUrl, tel, apexDomain } from '../config/site';
+import { site, addressLine, mapsUrl, tel, apexDomain, origin } from '../config/site';
 import { featureEnabled } from '../config/features';
 
 // The font families are declared in generated/brand.css and FETCHED here, and
@@ -49,7 +49,33 @@ const {
   title = site.defaultTitle,
   description = site.defaultDescription,
   active = '',
+  /**
+   * Page level social card. Pass a path under public/ to override the crest
+   * card that brand:init generates. Absolute URLs are built below: a relative
+   * og:image is ignored by every scraper, which is the most common way this
+   * tag is present and useless.
+   */
+  image = '/og-image.png',
 } = Astro.props;
+
+/*
+ * CANONICAL AND SOCIAL METADATA.
+ *
+ * Both were missing entirely: zero of thirteen pages carried a canonical link,
+ * an og: tag or a Twitter card. For a school whose links are passed around on
+ * WhatsApp, that is the difference between a crest with the school's name and
+ * a bare grey URL, on every share, forever.
+ *
+ * Everything here is derived. There is no per page social copy to forget to
+ * update, because the title and description a page already passes for <title>
+ * and the meta description are the same two strings a share card wants.
+ *
+ * Absolute URLs are mandatory for og:image and og:url. `origin` comes from
+ * site.domain, the same value astro.config.mjs uses for the sitemap, so a
+ * canonical link can never disagree with the host the sitemap advertises.
+ */
+const canonical = new URL(Astro.url.pathname, origin).href;
+const socialImage = new URL(image, origin).href;
 
 // Filtered once, used three times. A link that survives its feature being
 // switched off is a 404 with a signpost pointing at it, and the way that
@@ -66,6 +92,24 @@ const portalEnabled = featureEnabled('portal');
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={socialImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={site.logo.alt} />
+  <meta property="og:locale" content={site.ogLocale} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={socialImage} />
+
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />

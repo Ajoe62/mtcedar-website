@@ -1,4 +1,4 @@
-# The three things that must hold before a school site ships.
+# The five things that must hold before a school site ships.
 #
 # Ordered cheapest first, so a contrast regression does not wait behind an
 # image pipeline. Every one of them has caught something real: the contrast
@@ -50,3 +50,10 @@ jobs:
       # build, a broken paragraph.
       - name: Internal links
         run: npm run check:links
+
+      # Canonical links and share cards are invisible in a browser and visible
+      # in every share. This site ran for months with none of them, and the
+      # only symptom was that links pasted into WhatsApp came out as bare grey
+      # URLs, seen by everybody except the people who could fix it.
+      - name: Metadata
+        run: npm run check:meta

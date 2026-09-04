@@ -124,6 +124,15 @@ const hueGap = (a, b) => {
  * 5. Ink and muted are the primary hue at low chroma, never a neutral grey.
  *    Text that shares the brand's hue looks like it belongs to the page.
  */
+/**
+ * The text ramp keys, listed here so assignRoles can tell a pinned ramp step
+ * apart from a typo. buildRamps applies them; assignRoles must not reject them.
+ */
+export const RAMP_KEYS = [
+  'on-brand-strong', 'on-brand', 'on-brand-2', 'on-brand-3', 'on-brand-4',
+  'on-brand-5', 'on-brand-6', 'on-feature', 'on-feature-2', 'on-accent',
+];
+
 export function assignRoles(colors, overrides = {}) {
   const notes = [];
 
@@ -155,11 +164,45 @@ export function assignRoles(colors, overrides = {}) {
     notes.push('No third distinct hue; the feature band colour is the primary rotated 150 degrees.');
   }
 
-  const brand = oklchToRgb({ L: Math.min(brandSrc.L, 0.42), C: brandSrc.C, h: brandSrc.h });
+  /*
+   * An override replaces the colour the logo suggested BEFORE anything is
+   * derived from it, which is the only way it can mean what somebody writing
+   * it expects.
+   *
+   * This used to run at the end, over the finished roles. Correcting `accent`
+   * therefore changed the accent and nothing else: --accent-300, --accent-700,
+   * --accent-deep, --accent-text and both surface tints all stayed derived
+   * from the colour the extractor had guessed. You got your gold button on a
+   * page whose off-white, hover states and eyebrow text were still tuned to a
+   * red nobody had asked for. Mt Cedar is the proof: extraction reads its
+   * crest as green and RED, and pinning the accent alone would have fixed one
+   * swatch out of six.
+   *
+   * The extractor's lightness clamps are skipped for an overridden colour too.
+   * Clamping exists to stop a logo's own colour being unusable as a large
+   * fill; a value typed by a person is already the answer.
+   */
+  const SOURCE_ROLES = ['brand', 'accent', 'feature'];
+  const pin = (key, derive) => {
+    if (!overrides[key]) return derive();
+    notes.push(`--${key} pinned by brand.config overrides; its relatives follow it.`);
+    return overrides[key];
+  };
+
+  const brand = pin('brand', () =>
+    oklchToRgb({ L: Math.min(brandSrc.L, 0.42), C: brandSrc.C, h: brandSrc.h }),
+  );
   const brandO = rgbToOklch(brand);
 
-  const accent = oklchToRgb({ L: clamp(accentSrc.L, 0.6, 0.78), C: accentSrc.C, h: accentSrc.h });
+  const accent = pin('accent', () =>
+    oklchToRgb({ L: clamp(accentSrc.L, 0.6, 0.78), C: accentSrc.C, h: accentSrc.h }),
+  );
   const accentO = rgbToOklch(accent);
+
+  const feature = pin('feature', () =>
+    oklchToRgb({ L: clamp(featureSrc.L, 0.3, 0.45), C: featureSrc.C, h: featureSrc.h }),
+  );
+  const featureO = rgbToOklch(feature);
 
   const roles = {
     brand,
@@ -178,9 +221,9 @@ export function assignRoles(colors, overrides = {}) {
        darkened relative. The gate below is what sets how far it moves. */
     'accent-text': { ...accent },
 
-    feature: oklchToRgb({ L: clamp(featureSrc.L, 0.3, 0.45), C: featureSrc.C, h: featureSrc.h }),
-    'feature-900': oklchToRgb({ L: clamp(featureSrc.L, 0.3, 0.45) * 0.78, C: featureSrc.C, h: featureSrc.h }),
-    'feature-300': oklchToRgb({ L: clamp(featureSrc.L, 0.3, 0.45) * 1.35, C: featureSrc.C, h: (featureSrc.h + 12) % 360 }),
+    feature,
+    'feature-900': oklchToRgb({ ...featureO, L: featureO.L * 0.78 }),
+    'feature-300': oklchToRgb({ ...featureO, L: featureO.L * 1.35, h: (featureO.h + 12) % 360 }),
 
     surface: oklchToRgb({ L: 0.962, C: 0.014, h: accentO.h }),
     'surface-2': oklchToRgb({ L: 0.932, C: 0.02, h: accentO.h }),
@@ -190,11 +233,22 @@ export function assignRoles(colors, overrides = {}) {
     scrim: oklchToRgb({ L: 0.14, C: 0.03, h: brandO.h }),
   };
 
+  /*
+   * Fine grained overrides, for the roles that are not sources of anything.
+   * Pinning --surface or --muted directly is legitimate and affects nothing
+   * downstream, so it can safely happen here. The three source colours are
+   * skipped: they were applied above, before their relatives were derived.
+   */
   for (const [key, value] of Object.entries(overrides)) {
-    if (roles[key]) {
-      roles[key] = value;
-      notes.push(`${key} taken from brand.config overrides.`);
+    if (!value || SOURCE_ROLES.includes(key) || RAMP_KEYS.includes(key)) continue;
+    if (!roles[key]) {
+      throw new Error(
+        `brand.config.json overrides "${key}", which is not a colour role. ` +
+          `Valid: ${[...Object.keys(roles), ...RAMP_KEYS].sort().join(', ')}`,
+      );
     }
+    roles[key] = value;
+    notes.push(`--${key} pinned by brand.config overrides.`);
   }
 
   return { roles, notes };
@@ -209,10 +263,10 @@ export function assignRoles(colors, overrides = {}) {
  * brand colour belongs to the same family as the paper. The stylesheets used
  * to carry thirteen of these picked by eye.
  */
-export function buildRamps(roles) {
+export function buildRamps(roles, overrides = {}) {
   const s = rgbToOklch(roles.surface);
   const step = (L, C = s.C) => oklchToRgb({ L, C, h: s.h });
-  return {
+  const ramp = {
     'on-brand-strong': step(0.975, s.C * 0.8),
     'on-brand': step(0.945),
     'on-brand-2': step(0.9),
@@ -224,6 +278,18 @@ export function buildRamps(roles) {
     'on-feature-2': oklchToRgb({ L: 0.895, C: 0.035, h: rgbToOklch(roles.feature).h }),
     'on-accent': bestOn(roles.accent, { r: 255, g: 255, b: 255 }, oklchToRgb({ L: 0.18, C: 0.04, h: rgbToOklch(roles.accent).h })),
   };
+
+  /*
+   * The ramp is pinnable for the same reason the roles are. A school whose
+   * text colours were chosen before this tool existed needs brand:init to
+   * reproduce them, not to improve on them by four points per channel: the
+   * whole value of a generated file is that regenerating it is a no-op.
+   * A new school pins none of these and gets the derived ramp.
+   */
+  for (const [key, value] of Object.entries(overrides)) {
+    if (value && key in ramp) ramp[key] = value;
+  }
+  return ramp;
 }
 
 /* ---- Step four: the gate ------------------------------------------------- */

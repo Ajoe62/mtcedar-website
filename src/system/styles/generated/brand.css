@@ -1,22 +1,19 @@
 /* ==========================================================================
    GENERATED BRAND PALETTE
-   Mt Cedar British International School
 
-   Written by `npm run brand:init -- --logo brand/logo.png`. Hand edits are
-   overwritten on the next run; deliberate corrections belong in
-   brand/brand.config.ts, whose `overrides` block always beats extraction.
+   Written by `npm run brand:init -- --logo brand/logo.jpg`.
+   Hand edits here are overwritten on the next run. Deliberate corrections
+   belong in brand/brand.config.json under `overrides`, which beats
+   extraction and survives re-running.
 
-   This is the ONLY file that differs between one school's site and another's.
-   Nothing in here knows what a button, a footer or a hero is: the semantic
-   layer in tokens.css does that mapping. That separation is the whole point.
-   Before it existed, the brand green and gold were written out 25 more times
-   as raw rgba() literals scattered through the stylesheets, and every one of
-   them survived a palette swap and quietly kept the old school's colours.
+   This is the ONLY file that differs between one school's site and
+   another. Nothing in here knows what a button, a footer or a hero is:
+   the semantic layer in tokens.css does that mapping.
 
-   Colours are stored as space separated RGB triplets rather than hex so that
-   every alpha variant stays derivable: `rgb(var(--brand-rgb) / .14)`. A hex
-   value cannot do that without a second, hand written literal, and the second
-   literal is exactly what used to rot.
+   Colours are space separated RGB triplets rather than hex so that every
+   alpha variant stays derivable: `rgb(var(--brand-rgb) / .14)`. A hex
+   value cannot do that without a second, hand written literal, and the
+   second literal is what rots.
    ========================================================================== */
 
 :root {
@@ -26,69 +23,42 @@
   --brand-rgb: 18 60 40;
   /** Deepest step of the primary. Utility bar and footer ground. #0c2a1c */
   --brand-900-rgb: 12 42 28;
-
+  /** Primary lightened, for placeholder tints behind loading images. #20583c */
+  --brand-300-rgb: 32 88 60;
   /** Accent. Eyebrows, nav underlines, the primary call to action. #c39630 */
   --accent-rgb: 195 150 48;
   /** Accent lifted for dark grounds, and the focus ring. #e0b64a */
   --accent-300-rgb: 224 182 74;
-  /**
-   * The accent, darkened until it is legible as TEXT on the page ground. #8c6700
-   *
-   * A brand's accent is chosen to sit well as a fill, and a gold that looks
-   * right filling a button is nowhere near readable at 11px on ivory: the real
-   * accent measures 2.39:1 against --surface, against the 4.5 that small text
-   * needs. Eyebrows, tags and field labels use this; fills, rules, underlines
-   * and anything on a dark ground keep --accent and --accent-300, which are
-   * not text and are not held to a text ratio.
-   */
+  /** Accent lightened, placeholder tint. #b98a2b */
+  --accent-200-rgb: 185 138 43;
+  /** Accent darkened, placeholder tint. #8a6415 */
+  --accent-700-rgb: 138 100 21;
+  /** The accent darkened until it is legible as TEXT on the page ground. Eyebrows, tags and field labels. Fills and anything on a dark ground keep --accent. #8c6700 */
   --accent-text-rgb: 140 103 0;
-  /**
-   * Accent at roughly 60% lightness, used only underneath the gold button.
-   * A shadow tinted with the accent itself reads as a halo rather than a
-   * shadow, so the drop colour has to be the darker relative, not the accent.
-   */
+  /** Under the accent button only. A shadow in the accent's own colour reads as a halo and washes the edge out, so the drop colour is the darker relative. #8c6e14 */
   --accent-deep-rgb: 140 110 20;
-
-  /** Feature. The one high contrast band that is neither brand nor accent. #7c2230 */
+  /** The one high contrast band that is neither brand nor accent. #7c2230 */
   --feature-rgb: 124 34 48;
   /** Feature, deepened for the band's gradient tail. #5c1620 */
   --feature-900-rgb: 92 22 32;
-
-  /** Page ground. Warm rather than grey, because it carries the accent hue. #f5f0e5 */
+  /** Feature lightened, placeholder tint. #8c3b1e */
+  --feature-300-rgb: 140 59 30;
+  /** Page ground. Carries the accent's hue at very low chroma, which is why it reads warm rather than grey. #f5f0e5 */
   --surface-rgb: 245 240 229;
   /** Alternate band ground, one step down from the page. #efe7d6 */
   --surface-2-rgb: 239 231 214;
-
   /** Body text. The brand hue taken almost to black, never a neutral. #16211b */
   --ink-rgb: 22 33 27;
   /** Secondary text. The brand hue at mid lightness, low chroma. #5c6a60 */
   --muted-rgb: 92 106 96;
-
-  /** Photo scrims. The brand hue at near black, so overlays stay in family. */
+  /** Photo overlays. The brand hue at near black, so scrims stay in family. #081810 */
   --scrim-rgb: 8 24 16;
 
+  /* ---- Text ramps ------------------------------------------------------ */
   /*
-   * Placeholder tints, seen only while a card thumbnail is still decoding.
-   * These are lightened and darkened relatives of the three roles above, and
-   * they are computed HERE, when the palette is generated, rather than in the
-   * stylesheet with color-mix(). Doing the arithmetic at render time would
-   * push the whole site's floor from Chrome 88 (what aspect-ratio and clamp()
-   * already require) up to Chrome 111, and on a WebView below that the mix
-   * fails, the declaration is dropped, and the placeholder turns white. The
-   * target device for this site is a mid range Android, so that trade is not
-   * available to us.
-   */
-  --brand-300-rgb: 32 88 60;
-  --feature-300-rgb: 140 59 30;
-  --accent-200-rgb: 185 138 43;
-  --accent-700-rgb: 138 100 21;
-
-  /* ---- Text ramp for dark brand grounds -------------------------------- */
-  /*
-   * Six deliberate steps. The stylesheets previously carried thirteen
-   * near identical warm off whites, differing by three or four points and by
-   * accident rather than intent, which meant a new brand had thirteen values
-   * to re-pick by eye. These six are what those thirteen were reaching for.
+   * Generated from the page ground's hue, so light text on the brand colour
+   * belongs to the same family as the paper. These were thirteen near
+   * identical off whites picked by eye before the ramp existed.
    */
 
   /** Headings on a brand ground. */
@@ -103,55 +73,44 @@
   --on-brand-4: #c9c0ac;
   /** Footer prose. */
   --on-brand-5: #a9a290;
-  /**
-   * Footer fine print, the quietest legible step.
-   *
-   * Was #8f8877, which measured 4.37:1 on --brand-900. Close enough to look
-   * fine and not close enough to pass, which is the exact case a contrast gate
-   * exists to catch.
-   */
+  /** Footer fine print, the quietest legible step. */
   --on-brand-6: #928b7a;
-
-  /* ---- Text ramp for the feature band ---------------------------------- */
+  /** Body copy on the feature band. */
   --on-feature: #fbeee4;
+  /** Secondary copy on the feature band. */
   --on-feature-2: #f0d9cf;
-
-  /** Text on an accent fill. Contrast checked against --accent, not --accent-300. */
+  /** Text on an accent fill. Chosen by contrast, not by preference. */
   --on-accent: #20180a;
 
   /* ---- Type ------------------------------------------------------------ */
   /*
-   * The families applied by the stylesheet. The Google Fonts <link> that
-   * actually fetches them still lives in Layout.astro and is still hand
-   * written, so changing a family here means changing the link too; wiring
-   * the two together is Phase 2 work, once brand.config.ts exists to hold
-   * the request string alongside the family names.
+   * --font-google is the Google Fonts query string. The layout builds its
+   * <link> from brand.fonts.google in brand/fonts.json, which this run also
+   * wrote, so a preset change cannot load one family and apply another.
    */
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Mulish', system-ui, sans-serif;
   --font-display-weight: 600;
 
-  /* ---- Personality preset: classic-institutional ----------------------- */
-  /*
-   * Shape, depth and rhythm. These are what stop two schools built from this
-   * template reading as the same page in different colours, and they are the
-   * reason the preset is a brand decision rather than a system constant.
-   */
+  /* ---- Personality preset: classic-institutional ----
+     serif display, pill buttons, warm ground, dotted texture
+
+     Shape, depth and rhythm. These are what stop two schools built from
+     this template reading as the same page in different colours, which is
+     why the preset is a brand decision rather than a system constant. */
+
   --radius-card: 14px;
   --radius-lg: 16px;
   --radius-sm: 10px;
   --radius-ic: 12px;
   --radius-pill: 100px;
-
   --border-weight: 1px;
   --border-weight-btn: 2px;
-
   --section-y: 5rem;
   --section-y-slim: 3.6rem;
-
   --wrap-w: min(1160px, 92vw);
 
-  /** Dot grid on dark headers. Set to `none` for a preset without texture. */
+  /** Dot grid on dark headers. `none` for a preset without texture. */
   --texture-dot: radial-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px);
   --texture-dot-size: 22px 22px;
   --texture-dot-opacity: 0.5;

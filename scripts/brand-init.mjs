@@ -70,7 +70,7 @@ const overrides = Object.fromEntries(
 
 const clusters = await dominantColors(logoPath);
 const { roles, notes } = assignRoles(clusters, overrides);
-const ramps = buildRamps(roles);
+const ramps = buildRamps(roles, overrides);
 const { tokens, report } = auditAndFix({ ...roles, ...ramps });
 
 const failures = report.filter((r) => r.failed);

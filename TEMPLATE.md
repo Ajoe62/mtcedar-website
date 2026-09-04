@@ -35,7 +35,7 @@ $EDITOR src/content/{values,facilities,programmes,news,directions}/
 # 6. Composition. Which blocks, in what order, on which grounds.
 $EDITOR src/config/pages.ts
 
-npm run check                    # contrast + system guard + build + links
+npm run check                    # contrast + system guard + build + links + metadata
 npm run dev
 ```
 
@@ -243,8 +243,25 @@ alpha as 8-bit hex, so an authored `.14` reads back as `.141`; and a value that
 moves from a restatement to an inheritance shows up as a deletion even though
 nothing changed.
 
-`npm run check` runs the contrast gate, the system guard, the build and the
-link check.
+`npm run check` runs the contrast gate, the system guard, the build, the link
+check and the metadata check.
+
+### brand/brand.config.json is not optional
+
+`brand:init` reads a logo and guesses. It guesses well, and it is still a guess:
+on Mt Cedar's own crest it proposes a **salmon accent and a purple feature band**,
+because clustering the image finds green and red and cannot know which of them
+the school considers its second colour. A logo cannot tell it.
+
+`brand/brand.config.json` is where you correct that, and it **must be committed**.
+Without it, a fresh clone plus one `brand:init` run silently repaints a live
+site. `brand`, `accent` and `feature` are source colours: pinning one of those
+three re-derives everything hanging off it (`--accent-300`, `--accent-deep`,
+`--accent-text`, both surface tints), which is what you want. Pin the two or
+three the extractor gets wrong and let the rest derive.
+
+Mt Cedar pins its whole palette, because that palette was chosen by a designer
+years before this tool existed. A new school should pin far less.
 
 ---
 

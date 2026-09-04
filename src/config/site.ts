@@ -102,7 +102,17 @@ const SiteSchema = z.object({
    */
   domain: z.string().regex(/^[a-z0-9.-]+\.[a-z]{2,}$/, 'domain must be a bare hostname'),
 
+  /** The `lang` attribute on <html>. A bare language tag: "en", "fr". */
   locale: nonEmpty('locale'),
+  /**
+   * The `og:locale` tag, which wants language AND territory joined by an
+   * underscore ("en_NG"), not the bare tag <html lang> wants. They are
+   * deliberately two fields: deriving one from the other means owning a
+   * country-to-territory-code table for a value a school types once.
+   */
+  ogLocale: z
+    .string()
+    .regex(/^[a-z]{2}_[A-Z]{2}$/, 'ogLocale must look like en_NG'),
 
   logo: z.object({
     src: nonEmpty('logo.src'),
@@ -149,6 +159,7 @@ const config = {
 
   domain: 'www.mtcedarbritishinternationalsch.com.ng',
   locale: 'en',
+  ogLocale: 'en_NG',
 
   logo: {
     src: '/logo.jpg',
