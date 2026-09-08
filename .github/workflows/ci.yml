@@ -1,4 +1,4 @@
-# The five things that must hold before a school site ships.
+# The six things that must hold before a school site ships.
 #
 # Ordered cheapest first, so a contrast regression does not wait behind an
 # image pipeline. Every one of them has caught something real: the contrast
@@ -34,10 +34,18 @@ jobs:
         run: npm run brand:check
 
       # Has a client repo edited files that are shared with every other site?
+      - name: Fetch the template, for the system guard
+        run: |
+          git remote add template https://github.com/Ajoe62/school-site-template.git
+          git fetch --depth=1 template master
+
       - name: System guard
         run: npm run check:system
         env:
-          SYSTEM_GUARD_BASE: origin/${{ github.base_ref || 'master' }}
+          # The guard compares src/system against the TEMPLATE's copy, so CI
+          # needs the template fetched. Without this it finds no ref, warns,
+          # and passes: a guard that reports success without running.
+          SYSTEM_GUARD_BASE: template/master
 
       # Config schemas are parsed at module load, so a missing phone number or
       # an unknown icon name fails here rather than at launch.
@@ -57,3 +65,10 @@ jobs:
       # URLs, seen by everybody except the people who could fix it.
       - name: Metadata
         run: npm run check:meta
+
+      # A site built from the template ships placeholder copy that says TODO in
+      # the visible text. This fails the build while any of it survives, so a
+      # half-written site is something you cannot deploy rather than something
+      # you might not notice.
+      - name: Placeholder copy
+        run: npm run check:content

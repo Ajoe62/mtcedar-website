@@ -39,9 +39,9 @@ export async function dominantColors(logoPath, k = 8) {
   // The obvious approach, taking every (n/k)th pixel, samples the image in
   // reading order, so on a crest with a dark band across the top every seed
   // lands on nearly the same colour. K-means cannot recover from that: one
-  // cluster swallows the image and the rest stay empty. On Mt Cedar's own
-  // crest it produced a single cluster holding 100% of the pixels and a
-  // primary colour of pure black.
+  // cluster swallows the image and the rest stay empty. On the first crest
+  // this was tested against it produced a single cluster holding 100% of the
+  // pixels and a primary colour of pure black.
   //
   // Starting from the darkest pixel and then repeatedly taking whichever pixel
   // is furthest from everything chosen so far spreads the seeds across the
@@ -119,8 +119,8 @@ const hueGap = (a, b) => {
  *    a second colour rather than a shade of the first. Below 40 degrees a
  *    viewer sees one colour used twice.
  * 4. The page ground carries the accent's hue at very low chroma. This is why
- *    Mt Cedar's ivory reads warm instead of grey, and it reproduces for any
- *    brand without anybody choosing an off-white by eye.
+ *    a warm brand yields warm paper rather than grey, and it reproduces for
+ *    any brand without anybody choosing an off-white by eye.
  * 5. Ink and muted are the primary hue at low chroma, never a neutral grey.
  *    Text that shares the brand's hue looks like it belongs to the page.
  */
@@ -174,9 +174,9 @@ export function assignRoles(colors, overrides = {}) {
    * --accent-deep, --accent-text and both surface tints all stayed derived
    * from the colour the extractor had guessed. You got your gold button on a
    * page whose off-white, hover states and eyebrow text were still tuned to a
-   * red nobody had asked for. Mt Cedar is the proof: extraction reads its
-   * crest as green and RED, and pinning the accent alone would have fixed one
-   * swatch out of six.
+   * colour nobody had asked for. The crest this was built against is the
+   * proof: extraction reads it as green and RED, and pinning the accent alone
+   * would have fixed one swatch out of six.
    *
    * The extractor's lightness clamps are skipped for an overridden colour too.
    * Clamping exists to stop a logo's own colour being unusable as a large

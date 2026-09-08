@@ -2,8 +2,10 @@
 /**
  * Turns a fresh copy of this repo into a blank site for a different school.
  *
- *   npx degit Ajoe62/mtcedar-website greenfield
+ *   git clone https://github.com/Ajoe62/school-site-template.git greenfield
  *   cd greenfield && npm i
+ *   git remote rename origin template     # keeps system fixes reachable
+ *   git remote add origin <the school's own repo>
  *   node scripts/new-site.mjs --name "Greenfield Academy" --short Greenfield \
  *     --descriptor "International School" --domain www.greenfield.ng \
  *     --email hello@greenfield.ng --phone "0803 111 2222:+2348031112222" \
@@ -177,7 +179,7 @@ ${stale.map((s) => `    ${String(s.hits).padStart(3)}  ${s.file}`).join('\n')}
     2. Fill the TODOs in src/config/site.ts.
 
     3. Write src/content/{values,facilities,programmes,news,directions}/*.md
-       See TEMPLATE.md for each collection's shape.
+       See README.md for each collection's shape.
 
     4. Set src/config/features.ts and src/config/pages.ts.
 
