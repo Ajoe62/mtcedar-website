@@ -1,8 +1,10 @@
 ---
+import Icon from '../system/components/Icon.astro';
 import Layout from '../layouts/Layout.astro';
-import MediaText from '../components/MediaText.astro';
-import FullBleed from '../components/FullBleed.astro';
-import Facilities from '../components/Facilities.astro';
+import { site } from '../config/site';
+import MediaText from '../system/blocks/Media/Text.astro';
+import FullBleed from '../system/blocks/Media/FullBleed.astro';
+import Facilities from '../system/blocks/Feature/Grid.astro';
 import { Image } from 'astro:assets';
 import artsPhoto from '../assets/images/artandcraftpupils.jpg';
 import curiosityPhoto from '../assets/images/sciencepupils.jpg';
@@ -10,7 +12,7 @@ import communityPhoto from '../assets/images/culturalattireday.jpg';
 import welcomePhoto from '../assets/images/outdoorplay.jpg';
 ---
 <Layout
-  title="School Life - Mt Cedar British International School"
+  title={`School Life - ${site.name}`}
   description="Beyond the classroom at Mt Cedar British International School: sport and the arts, character and community, pastoral care and a safe, joyful place to grow."
   active="school-life"
 >
@@ -28,32 +30,32 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
     <div class="sec-head"><p class="eyebrow">A Full School Day</p><h2>Room to explore, belong and shine.</h2><p>We want children to leave each day a little more confident, a little more curious, and glad to come back tomorrow.</p></div>
     <div class="feat-grid">
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 0 0 18M12 3a15 15 0 0 1 0 18M3 12h18"/></svg></div>
+        <div class="ic"><Icon name="ball" /></div>
         <h3>Sport &amp; Play</h3>
         <p>Active, healthy days with games and physical education that build teamwork, resilience and joy in movement.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3Z"/></svg></div>
+        <div class="ic"><Icon name="music" /></div>
         <h3>Arts &amp; Music</h3>
         <p>Creative expression through music, drama and the visual arts, with space for every child to discover a talent.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"/></svg></div>
+        <div class="ic"><Icon name="heart" /></div>
         <h3>Character &amp; Service</h3>
         <p>Honesty, kindness and courage, practised through everyday responsibility and care for one another.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7v6c0 5 3.5 8 9 9 5.5-1 9-4 9-9V7l-9-5Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="ic"><Icon name="shield-check" /></div>
         <h3>Safe &amp; Nurturing</h3>
         <p>A secure, welcoming environment where pastoral care means every child is known, supported and valued.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 6a3 3 0 0 1 0 6"/><path d="M18 20a6 6 0 0 0-3-5.2"/></svg></div>
+        <div class="ic"><Icon name="users" /></div>
         <h3>Community</h3>
         <p>A close partnership between pupils, parents and staff - celebrated together on Founder’s Day and beyond.</p>
       </div>
       <div class="feat">
-        <div class="ic"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="ic"><Icon name="eye" /></div>
         <h3>Curiosity &amp; Enquiry</h3>
         <p>Clubs, projects and real-world learning - like our science fair; that turn wondering into discovery.</p>
       </div>
@@ -66,7 +68,7 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
   alt="Mt Cedar pupils enjoying art and craft"
   eyebrow="Creativity"
   title="Arts, music and making."
-  background="var(--ivory-2)"
+  surface="alt"
 >
   <p>From art and craft to music and drama, we give every child room to create, perform and discover a talent. Creative work builds confidence, focus and joy;and it belongs at the heart of a good education.</p>
 </MediaText>
@@ -81,7 +83,7 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
 </FullBleed>
 
 <Facilities
-  background="var(--ivory-2)"
+  surface="alt"
   title="The spaces behind a full school day."
   intro="A music studio and instruments, sports facilities and playing grounds, an art and craft studio, and well equipped Biology, Chemistry, Physics and Computer laboratories: every interest has somewhere to grow."
 />
@@ -107,7 +109,7 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
       <blockquote>“Character isn’t taught in a single lesson; it’s grown in a thousand small moments across a school day. That is the work we love most.”</blockquote>
       <div class="signoff">The Mt Cedar Team<small>Excellence · Character · Growth</small></div>
       <div class="cta" style="margin-top:1.6rem">
-        <a class="btn btn-cedar" href="/contact">Come and Visit <span class="arr">→</span></a>
+        <a class="btn btn-brand" href="/contact">Come and Visit <span class="arr">→</span></a>
       </div>
     </div>
   </div>
@@ -115,7 +117,7 @@ import welcomePhoto from '../assets/images/outdoorplay.jpg';
 
 <section class="band">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--gold-bright)">See it for yourself</p>
+    <p class="eyebrow" style="color:var(--accent-300)">See it for yourself</p>
     <h2>The best way to know Mt Cedar is to visit.</h2>
     <p>Spend a morning with us and see what a Mt Cedar school day feels like for your child.</p>
     <div class="cta">

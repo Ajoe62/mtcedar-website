@@ -1,0 +1,117 @@
+/* ==========================================================================
+   GENERATED BRAND PALETTE
+
+   Written by `npm run brand:init -- --logo brand/logo.jpg`.
+   Hand edits here are overwritten on the next run. Deliberate corrections
+   belong in brand/brand.config.json under `overrides`, which beats
+   extraction and survives re-running.
+
+   This is the ONLY file that differs between one school's site and
+   another. Nothing in here knows what a button, a footer or a hero is:
+   the semantic layer in tokens.css does that mapping.
+
+   Colours are space separated RGB triplets rather than hex so that every
+   alpha variant stays derivable: `rgb(var(--brand-rgb) / .14)`. A hex
+   value cannot do that without a second, hand written literal, and the
+   second literal is what rots.
+   ========================================================================== */
+
+:root {
+  /* ---- Core roles ------------------------------------------------------ */
+
+  /** Primary. Dark sections, solid buttons, icon glyphs. #123c28 */
+  --brand-rgb: 18 60 40;
+  /** Deepest step of the primary. Utility bar and footer ground. #0c2a1c */
+  --brand-900-rgb: 12 42 28;
+  /** Primary lightened, for placeholder tints behind loading images. #20583c */
+  --brand-300-rgb: 32 88 60;
+  /** Accent. Eyebrows, nav underlines, the primary call to action. #c39630 */
+  --accent-rgb: 195 150 48;
+  /** Accent lifted for dark grounds, and the focus ring. #e0b64a */
+  --accent-300-rgb: 224 182 74;
+  /** Accent lightened, placeholder tint. #b98a2b */
+  --accent-200-rgb: 185 138 43;
+  /** Accent darkened, placeholder tint. #8a6415 */
+  --accent-700-rgb: 138 100 21;
+  /** The accent darkened until it is legible as TEXT on the page ground. Eyebrows, tags and field labels. Fills and anything on a dark ground keep --accent. #8c6700 */
+  --accent-text-rgb: 140 103 0;
+  /** Under the accent button only. A shadow in the accent's own colour reads as a halo and washes the edge out, so the drop colour is the darker relative. #8c6e14 */
+  --accent-deep-rgb: 140 110 20;
+  /** The one high contrast band that is neither brand nor accent. #7c2230 */
+  --feature-rgb: 124 34 48;
+  /** Feature, deepened for the band's gradient tail. #5c1620 */
+  --feature-900-rgb: 92 22 32;
+  /** Feature lightened, placeholder tint. #8c3b1e */
+  --feature-300-rgb: 140 59 30;
+  /** Page ground. Carries the accent's hue at very low chroma, which is why it reads warm rather than grey. #f5f0e5 */
+  --surface-rgb: 245 240 229;
+  /** Alternate band ground, one step down from the page. #efe7d6 */
+  --surface-2-rgb: 239 231 214;
+  /** Body text. The brand hue taken almost to black, never a neutral. #16211b */
+  --ink-rgb: 22 33 27;
+  /** Secondary text. The brand hue at mid lightness, low chroma. #5c6a60 */
+  --muted-rgb: 92 106 96;
+  /** Photo overlays. The brand hue at near black, so scrims stay in family. #081810 */
+  --scrim-rgb: 8 24 16;
+
+  /* ---- Text ramps ------------------------------------------------------ */
+  /*
+   * Generated from the page ground's hue, so light text on the brand colour
+   * belongs to the same family as the paper. These were thirteen near
+   * identical off whites picked by eye before the ramp existed.
+   */
+
+  /** Headings on a brand ground. */
+  --on-brand-strong: #fbf6ea;
+  /** Body copy on a brand ground. */
+  --on-brand: #f3ecdb;
+  /** Utility bar, and body copy on the mid brand sections. */
+  --on-brand-2: #e7e0cf;
+  /** Lead paragraphs and mottos on a brand ground. */
+  --on-brand-3: #d9d0bd;
+  /** Supporting copy inside cards on a brand ground. */
+  --on-brand-4: #c9c0ac;
+  /** Footer prose. */
+  --on-brand-5: #a9a290;
+  /** Footer fine print, the quietest legible step. */
+  --on-brand-6: #928b7a;
+  /** Body copy on the feature band. */
+  --on-feature: #fbeee4;
+  /** Secondary copy on the feature band. */
+  --on-feature-2: #f0d9cf;
+  /** Text on an accent fill. Chosen by contrast, not by preference. */
+  --on-accent: #20180a;
+
+  /* ---- Type ------------------------------------------------------------ */
+  /*
+   * --font-google is the Google Fonts query string. The layout builds its
+   * <link> from brand.fonts.google in brand/fonts.json, which this run also
+   * wrote, so a preset change cannot load one family and apply another.
+   */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Mulish', system-ui, sans-serif;
+  --font-display-weight: 600;
+
+  /* ---- Personality preset: classic-institutional ----
+     serif display, pill buttons, warm ground, dotted texture
+
+     Shape, depth and rhythm. These are what stop two schools built from
+     this template reading as the same page in different colours, which is
+     why the preset is a brand decision rather than a system constant. */
+
+  --radius-card: 14px;
+  --radius-lg: 16px;
+  --radius-sm: 10px;
+  --radius-ic: 12px;
+  --radius-pill: 100px;
+  --border-weight: 1px;
+  --border-weight-btn: 2px;
+  --section-y: 5rem;
+  --section-y-slim: 3.6rem;
+  --wrap-w: min(1160px, 92vw);
+
+  /** Dot grid on dark headers. `none` for a preset without texture. */
+  --texture-dot: radial-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  --texture-dot-size: 22px 22px;
+  --texture-dot-opacity: 0.5;
+}
